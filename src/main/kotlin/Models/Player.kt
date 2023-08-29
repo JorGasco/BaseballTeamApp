@@ -39,6 +39,17 @@ class Player(
         return false
     }
 
+    fun update(id: Int, stat: Stat): Boolean {
+        val foundStat = findOne(id)
+
+        if (foundStat != null) {
+            foundStat.hits = stat.hits
+            foundStat.vecesAlBate = stat.vecesAlBate
+            return true
+        }
+        return false
+    }
+
     fun getFullName(): String{
         val fullName = "${playerName} ${playerSurname}"
         return  fullName
