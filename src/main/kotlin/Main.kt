@@ -42,6 +42,12 @@ fun start(){
             4 -> deletePlayer()
             5 -> updatePlayer()
             //6 -> setPlayerActivity()
+
+            7-> addStats()
+            8-> listStats()
+            9-> deleteStat()
+            10->updateStat()
+            11->searchStat()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
