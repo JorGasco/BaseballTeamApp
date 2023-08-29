@@ -32,9 +32,32 @@ class Stat (var vecesAlBate: Int,
         }
 
 
+        override fun toString(): String {
 
+            return """ 
+        
+        |                               Stats
+        |                                                    Stat ID: ${statsId}         
+        |Veces al bate : ${vecesAlBate}
+        |
+        |Hits: ${hits}
+        |Doubles: $doubles
+        |Triples: $triples
+        |HomeRuns: $homeRuns
+        |
+        |Runs: ${runs}
+        |Walks: ${walks}
+        |StrikeOuts: ${strikeOut}
+        |                  
+        |Average = ${average()}               
+        |______________________________________________________________________    
+        |""".trimMargin("|")
 
+        }
     }
+
+
+
 
 
 
