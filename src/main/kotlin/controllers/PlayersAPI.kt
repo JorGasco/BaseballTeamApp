@@ -132,6 +132,20 @@ class PlayersAPI(serializerType: Serializer) {
         return String.format("%.2f", average)
 
     }
+
+    fun averageWeight(): String {
+        val totalWeight = players.sumByDouble { it.weight }
+        val average = totalWeight.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
+
+    fun averageHeight(): String {
+        val totalHeight = players.sumByDouble { it.height }
+        val average = totalHeight.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
 }
 
 
