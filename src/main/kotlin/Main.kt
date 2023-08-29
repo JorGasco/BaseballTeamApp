@@ -34,6 +34,10 @@ fun start(){
             11->searchStat()
 
 
+            12->searchPositions()
+            13-> searchPlayerByName()
+            14->searchStatsByHits()
+
 
 
 
