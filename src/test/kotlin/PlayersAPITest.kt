@@ -111,4 +111,24 @@ class PlayersAPITest {
             assertEquals("outfield", populatedPlayers!!.findPlayer(0)!!.position)
         }
     }
+
+    @Nested
+    inner class DeletePlayers {
+
+        @Test
+        fun `deleting a Player that does not exist, returns false`() {
+            assertEquals(false, emptyPlayers!!.delete(0))
+            assertEquals(false, populatedPlayers!!.delete(-1))
+            assertEquals(false, populatedPlayers!!.delete(5))
+        }
+
+        @Test
+        fun `deleting a Player that exists delete and returns deleted object`() {
+            assertEquals(5, populatedPlayers!!.numberOfPlayers())
+            assertEquals(true, populatedPlayers!!.delete(4))
+            assertEquals(4, populatedPlayers!!.numberOfPlayers())
+            assertEquals(true, populatedPlayers!!.delete(0))
+            assertEquals(3, populatedPlayers!!.numberOfPlayers())
+        }
+    }
 }
