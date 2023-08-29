@@ -1,3 +1,5 @@
+import Utils.ScannerInput
+
 fun main(args: Array<String>) {
    start()
 }
@@ -32,4 +34,32 @@ fun start(){
         }
         println()
     } while (input != -1)
+}
+
+fun add() {
+
+
+    val playerName  = ScannerInput.readNextLine("First Name: ")
+    val playerSurname  = ScannerInput.readNextLine("Surname: ")
+    val age  = ScannerInput.readNextInt("age: ")
+    val height  = ScannerInput.readNextDouble("Please enter Height between 0.01 - 3.00: ")
+    val weight  = ScannerInput.readNextDouble("weight:")
+    val position = ScannerInput.readNextLine(
+        """
+              > --------------------------------
+              > | Write the position            |
+              > |   1 - Infield                 |
+              > |   2 - OutField                |
+              > |   3 - Pitcher                 |
+              > --------------------------------
+     > ==>> """.trimMargin(">")
+    )
+
+    val isAdded: Boolean = players.add(Player(playerName = playerName, playerSurname = playerSurname, age = age, height = height,weight=weight,position=position))
+
+    if (isAdded) {
+        println("Added Franchise Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
