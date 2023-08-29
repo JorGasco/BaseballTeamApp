@@ -89,22 +89,42 @@ class PlayersAPI(serializerType: Serializer) {
         lastId = players.size
     }
 
-    fun numberOfPlayers(): Int {
-        return players.size
-    }
 
-    fun listAllPLayers(): String{
+
+    fun listAllPLayers(): String {
         if (players.isEmpty()) {
             "There are no players"
 
         }
         return formatListString(players)
     }
+
     fun searchByPositions(searchString: String) =
         formatListString(players.filter { player -> player.position.contains(searchString, ignoreCase = true) })
 
     fun searchPlayerName(searchString: String) =
         formatListString(players.filter { player -> player.playerName.contains(searchString, ignoreCase = true) })
+
+    fun numberOfPlayers(): Int {
+        return players.size
+    }
+
+    fun searchHits(searchInt: Int): String {
+        return if (numberOfPlayers() == 0) {
+            "No Players available"
+        } else {
+            var listOfPlayers = ""
+            for (player in players) {
+                for (stat in player.stats) {
+                    if (stat.hits <= searchInt) {
+                        listOfPlayers += "${player.playerId}: ${player.getFullName()} \n\t${stat}\n"
+                    }
+                }
+            }
+            if (listOfPlayers == "") "No Stats found : $searchInt"
+            else listOfPlayers
+        }
+    }
 }
 
 

@@ -318,6 +318,16 @@ fun searchPlayerByName() {
     }
 }
 
+fun searchStatsByHits() {
+    val searchHits = ScannerInput.readNextInt("Enter Hits of Stat to search for: ")
+    val searchResults = players.searchHits(searchHits)
+    if (searchResults.isEmpty()) {
+        println("No Hits ")
+    } else {
+        println(searchResults)
+    }
+}
+
 
 
 
