@@ -23,7 +23,7 @@ fun start(){
     do {
         input = menu()
         when (input) {
-            /*1 -> add()
+            1 -> add()
             2 -> listPlayers()
             3 -> search()
             4 -> deletePlayer()
