@@ -9,7 +9,7 @@ class Stat (var vecesAlBate: Int,
             var strikeOut: Int,
             var walks: Int,
             var statsId: Int = 0,
-            var statAtDate: Boolean = false
+
 ){
 
         // total of hits to calculate the average

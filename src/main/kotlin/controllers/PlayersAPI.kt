@@ -100,7 +100,14 @@ class PlayersAPI(serializerType: Serializer) {
         }
         return formatListString(players)
     }
+    fun searchByPositions(searchString: String) =
+        formatListString(players.filter { player -> player.position.contains(searchString, ignoreCase = true) })
+
+    fun searchPlayerName(searchString: String) =
+        formatListString(players.filter { player -> player.playerName.contains(searchString, ignoreCase = true) })
 }
+
+
 
 
 

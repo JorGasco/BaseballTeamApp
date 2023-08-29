@@ -93,6 +93,12 @@ fun menu() : Int {
          |   
          |   -----------------------------
          |   
+         |   12. Search Positions
+         |   13. Search Name Player
+         |   14.Search Hits
+         |   
+         |   15.Total Average
+         |   
          |   19. Load
          |   20. Save
          |   
@@ -289,6 +295,26 @@ fun load() {
         println("Load Successful")
     } catch (e: Exception) {
         System.err.println("Error reading from file: $e")
+    }
+}
+
+fun searchPositions() {
+    val searchPositions = ScannerInput.readNextLine("Enter the Name to search by: ")
+    val searchResults = players.searchByPositions(searchPositions)
+    if (searchResults.isEmpty()) {
+        println("No Players found")
+    } else {
+        println(searchResults)
+    }
+}
+
+fun searchPlayerByName() {
+    val searchName = ScannerInput.readNextLine("Enter the Name of Player to search for: ")
+    val searchResults = players.searchPlayerName(searchName)
+    if (searchResults.isEmpty()) {
+        println("No franchises of that publisher found")
+    } else {
+        println(searchResults)
     }
 }
 
