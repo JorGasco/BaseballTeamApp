@@ -24,6 +24,10 @@ class Player(
         return stats.add(stat)
     }
 
+    fun findOne(id: Int): Stat? {
+        return stats.find { p -> p.statsId == id }
+    }
+
     fun getFullName(): String{
         val fullName = "${playerName} ${playerSurname}"
         return  fullName
