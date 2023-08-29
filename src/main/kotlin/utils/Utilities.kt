@@ -4,8 +4,8 @@ import models.Player
 object Utilities {
 
     @JvmStatic
-    fun formatListString(notesToFormat: List<Player>): String =
-        notesToFormat
+    fun formatListString(PlayersToFormat: List<Player>): String =
+        PlayersToFormat
             .joinToString(separator = "\n") { player -> "$player" }
 
     @JvmStatic
