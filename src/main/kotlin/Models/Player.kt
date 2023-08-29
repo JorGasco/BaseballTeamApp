@@ -28,6 +28,17 @@ class Player(
         return stats.find { p -> p.statsId == id }
     }
 
+    fun delete(id: Int): Boolean {
+        val foundStat = findOne(id)
+
+        if (foundStat != null) {
+            // Use the 'remove' function to remove the found employee from the list.
+            stats.remove(foundStat)
+            return true
+        }
+        return false
+    }
+
     fun getFullName(): String{
         val fullName = "${playerName} ${playerSurname}"
         return  fullName
