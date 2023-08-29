@@ -19,17 +19,11 @@ class Stat (var vecesAlBate: Int,
         }
 
 
-        fun average(): Double {
-            // Check if vecesAlBate is not zero to avoid division by zero
-            if (vecesAlBate != 0 && vecesAlBate>totalHits()) {
-                val result = totalHits() / vecesAlBate.toDouble()
-                // Format the result with three decimal places
-                return result
-            } else {
-                // Return 0.000 if vecesAlBate is zero or if hits is more than the number at Bats
-                return  0.00
-            }
-        }
+    fun average(): String {
+
+        val average = totalHits() / vecesAlBate.toDouble()
+        return String.format("%.3f", average)
+    }
 
 
 

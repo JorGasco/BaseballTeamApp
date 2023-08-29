@@ -125,6 +125,82 @@ class PlayersAPI(serializerType: Serializer) {
             else listOfPlayers
         }
     }
+
+    fun averageAge(): String {
+        val totalAge = players.sumBy { it.age }
+        val average = totalAge.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
+
+    fun averageWeight(): String {
+        val totalWeight = players.sumByDouble { it.weight }
+        val average = totalWeight.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
+
+    fun averageHeight(): String {
+        val totalHeight = players.sumByDouble { it.height }
+        val average = totalHeight.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
+
+    fun averagePlayerStats(): String {
+        val totalPlayers = players.size
+
+        // Initialize variables to store the sum of each statistic
+        var totalHits = 0
+        var totalDoubles = 0
+        var totalTriples = 0
+        var totalHomeRuns = 0
+        var totalRuns = 0
+        var totalStrikeouts = 0
+        var totalWalks = 0
+
+        // Calculate the sum of each statistic across all players
+        for (player in players) {
+            totalHits += player.stats.sumBy { it.hits }
+            totalDoubles += player.stats.sumBy { it.doubles }
+            totalTriples += player.stats.sumBy { it.triples }
+            totalHomeRuns += player.stats.sumBy { it.homeRuns }
+            totalRuns += player.stats.sumBy { it.runs }
+            totalStrikeouts += player.stats.sumBy { it.strikeOut }
+            totalWalks += player.stats.sumBy { it.walks }
+        }
+
+        // Calculate the averages
+        val averageHits = totalHits.toDouble() / totalPlayers
+        val averageDoubles = totalDoubles.toDouble() / totalPlayers
+        val averageTriples = totalTriples.toDouble() / totalPlayers
+        val averageHomeRuns = totalHomeRuns.toDouble() / totalPlayers
+        val averageRuns = totalRuns.toDouble() / totalPlayers
+        val averageStrikeouts = totalStrikeouts.toDouble() / totalPlayers
+        val averageWalks = totalWalks.toDouble() / totalPlayers
+
+        val stringHits = String.format("%.2f", averageHits)
+        val stringaverageDoubles = String.format("%.2f", averageDoubles)
+        val stringaverageTriples = String.format("%.2f", averageTriples)
+        val stringaverageHomeRuns = String.format("%.2f", averageHomeRuns)
+        val stringaverageRuns = String.format("%.2f", averageRuns)
+        val stringaverageStrikeouts = String.format("%.2f", averageStrikeouts)
+        val stringaverageWalks = String.format("%.2f", averageWalks)
+
+
+        // Create a formatted string to display the averages
+        return """
+        |-------------------------------------
+        |Average Hits: $stringHits
+        |Average Doubles: $stringaverageDoubles
+        |Average Triples: $stringaverageTriples
+        |Average Home Runs: $stringaverageHomeRuns
+        |Average Runs: $stringaverageRuns
+        |Average Strikeouts: $stringaverageStrikeouts
+        |Average Walks: $stringaverageWalks
+        |-------------------------------------
+    """.trimMargin("|")
+    }
 }
 
 
