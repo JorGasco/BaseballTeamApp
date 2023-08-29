@@ -79,5 +79,3 @@
             return Scanner(System.`in`).next()[0]
         }
     }
-
-}
