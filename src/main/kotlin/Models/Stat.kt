@@ -11,7 +11,15 @@ class Stat (var vecesAlBate: Int,
             var statsId: Int = 0,
             var statAtDate: Boolean = false
 ) {
-   
+
+        // total of hits to calculate the average
+        fun totalHits(): Int{
+            val Sum = hits+doubles+triples+homeRuns
+            return Sum
+        }
+
+
+
 
 
 }
