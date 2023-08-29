@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="PlayersAPITest$UpdatePlayers" tests="2" skipped="0" failures="0" errors="0" timestamp="2023-08-29T23:36:10" hostname="LAPTOP-V0RRUT35" time="0.005">
+  <properties/>
+  <testcase name="updating a Player that exists returns true and updates()" classname="PlayersAPITest$UpdatePlayers" time="0.002"/>
+  <testcase name="updating a Player that does not exist returns false()" classname="PlayersAPITest$UpdatePlayers" time="0.002"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

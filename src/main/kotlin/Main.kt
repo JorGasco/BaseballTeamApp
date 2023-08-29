@@ -317,7 +317,7 @@ fun searchPlayerByName() {
     val searchName = ScannerInput.readNextLine("Enter the Name of Player to search for: ")
     val searchResults = players.searchPlayerName(searchName)
     if (searchResults.isEmpty()) {
-        println("No franchises of that publisher found")
+        println("No Players of that publisher found")
     } else {
         println(searchResults)
     }

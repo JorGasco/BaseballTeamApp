@@ -2,10 +2,12 @@ import controllers.PlayersAPI
 import models.Player
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
+import org.junit.jupiter.api.Nested
 import org.junit.jupiter.api.Test
 import persistence.JSONSerializer
 import java.io.File
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 
 class PlayersAPITest {
@@ -63,5 +65,50 @@ class PlayersAPITest {
         assertTrue(emptyPlayers!!.add(newPlayer))
         assertEquals(1, emptyPlayers!!.numberOfPlayers())
         assertEquals(newPlayer, emptyPlayers!!.findPlayer(emptyPlayers!!.numberOfPlayers() - 1))
+    }
+
+    @Nested
+    inner class UpdatePlayers {
+        @Test
+        fun `updating a Player that does not exist returns false`() {
+            assertFalse(
+                populatedPlayers!!.update(
+                    6,
+                    Player(6, "Updating Name", "Updating Surname", 50, 3.00, 50.00, "Pitcher")
+                )
+            )
+            assertFalse(
+                populatedPlayers!!.update(
+                    -1,
+                    Player(-1, "Updating Name", "Updating Surname", 50, 3.00, 50.00, "Pitcher")
+                )
+            )
+            assertFalse(
+                emptyPlayers!!.update(
+                    0,
+                    Player(0, "Updating Name", "Updating Surname", 50, 3.00, 50.00, "Pitcher")
+                )
+            )
+        }
+
+        @Test
+        fun `updating a Player that exists returns true and updates`() {
+            // check Player 5 exists and check the contents
+            assertEquals(Jorge, populatedPlayers!!.findPlayer(0))
+            assertEquals("Jorge", populatedPlayers!!.findPlayer(0)!!.playerName)
+            assertEquals("Gasco", populatedPlayers!!.findPlayer(0)!!.playerSurname)
+            assertEquals(25, populatedPlayers!!.findPlayer(0)!!.age)
+            assertEquals(25.00, populatedPlayers!!.findPlayer(0)!!.height)
+            assertEquals("outfield", populatedPlayers!!.findPlayer(0)!!.position)
+
+            // update Player 5 with new information and ensure contents updated successfully
+            assertTrue(populatedPlayers!!.update(0, Player(0, "Updated", "Updated", 25, 25.00, 25.00, "outfield")))
+            assertEquals("Updated", populatedPlayers!!.findPlayer(0)!!.playerName)
+            assertEquals("Updated", populatedPlayers!!.findPlayer(0)!!.playerSurname)
+            assertEquals(25, populatedPlayers!!.findPlayer(0)!!.age)
+            assertEquals(25.00, populatedPlayers!!.findPlayer(0)!!.height)
+            assertEquals(25.00, populatedPlayers!!.findPlayer(0)!!.weight)
+            assertEquals("outfield", populatedPlayers!!.findPlayer(0)!!.position)
+        }
     }
 }
