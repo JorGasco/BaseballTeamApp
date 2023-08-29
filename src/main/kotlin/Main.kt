@@ -38,6 +38,7 @@ fun start(){
             13-> searchPlayerByName()
             14->searchStatsByHits()
 
+            15->report()
 
 
 
@@ -330,6 +331,21 @@ fun searchStatsByHits() {
     } else {
         println(searchResults)
     }
+}
+
+fun report(){
+    println("""
+        |______________________________________________________________________
+        |                               Team Stats 
+        |                               
+        |Average Age:${players.averageAge()} Years old                                     
+        |Average Height : ${players.averageHeight()} Meters               
+        |Average Weight : ${players.averageWeight()}  Kg
+        |                 
+        |${players.averagePlayerStats()}
+        |
+        |______________________________________________________________________    
+        """.trimMargin("|"))
 }
 
 
