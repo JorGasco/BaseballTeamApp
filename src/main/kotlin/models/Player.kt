@@ -1,17 +1,15 @@
-package Models
+package models
 
-import models.Stat
-
-class Player(
-    var playerId: Int = 0,
-    var playerName: String,
-    var playerSurname: String,
-    var age: Int,
-    var height: Double,
-    var weight: Double,
-    var position: String,
-    var isActivePlayer: Boolean = false,
-    var stats: MutableSet<Stat> = mutableSetOf()){
+data class Player (var playerId: Int = 0,
+                   var playerName: String,
+                   var playerSurname: String,
+                   var age: Int,
+                   var height: Double,
+                   var weight: Double,
+                   var position: String,
+                   var isActivePlayer: Boolean = false,
+                   var stats: MutableSet<Stat> = mutableSetOf())
+{
 
     private var lastStatId = 0
 
@@ -19,10 +17,12 @@ class Player(
         return lastStatId++
     }
 
+
     fun add(stat: Stat): Boolean  {
         stat.statsId = getStatId()
         return stats.add(stat)
     }
+
 
     fun findOne(id: Int): Stat? {
         return stats.find { p -> p.statsId == id }
@@ -45,10 +45,20 @@ class Player(
         if (foundStat != null) {
             foundStat.hits = stat.hits
             foundStat.vecesAlBate = stat.vecesAlBate
+            foundStat.walks=stat.walks
+            foundStat.runs=stat.runs
+            foundStat.strikeOut=stat.strikeOut
+            foundStat.doubles=stat.doubles
+            foundStat.triples=stat.triples
+            foundStat.homeRuns=stat.homeRuns
             return true
         }
         return false
     }
+
+
+
+
 
     fun getFullName(): String{
         val fullName = "${playerName} ${playerSurname}"
@@ -57,12 +67,12 @@ class Player(
 
     override fun toString(): String {
         return """
-        |______________________________________________________________________
+        |----------------------------- Player --------------------------------
         |Name:${getFullName()}                                 ID: ${playerId}     
         |Age : ${age} Years old               Active Player: ${isActivePlayer}
         |Height : ${height} m                            Position: ${position}
         |Weight : ${weight} Kg
-        |______________________________________________________________________    
+            
         """.trimMargin("|")
     }
 }

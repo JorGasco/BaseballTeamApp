@@ -1,10 +1,14 @@
-package Controllers
-
-import Models.Player
+package controllers
+import models.Player
+import models.Stat
+import utils.Utilities.formatListString
 
 import persistence.Serializer
-import utils.Utilities.formatListString
+import utils.Utilities.isArrayList
+
 import java.util.ArrayList
+
+
 
 class PlayersAPI(serializerType: Serializer) {
 
@@ -12,7 +16,7 @@ class PlayersAPI(serializerType: Serializer) {
 
     private var players = ArrayList<Player>()
 
-    var lastId = 0
+    private var lastId = 0
 
     private fun getId(): Int {
         return lastId++
@@ -23,13 +27,13 @@ class PlayersAPI(serializerType: Serializer) {
         return players.add(player)
     }
 
-    fun findOne(id: Int): Player? {
-        return players.find { p -> p.playerId == id }
+    //List
+    fun findAll(): List<Player> {
+        return players
     }
 
-    fun listAllPLayers() {
-        if (players.isEmpty()) "There are no players"
-        else formatListString(players)
+    fun findOne(id: Int): Player? {
+        return players.find { p -> p.playerId == id }
     }
 
     fun delete(id: Int): Boolean {
@@ -58,9 +62,7 @@ class PlayersAPI(serializerType: Serializer) {
         return false
     }
 
-    fun numberOfPlayers(): Int {
-        return players.size
-    }
+
     fun listAllStats() =
         if (players.isEmpty()) "There are no Players and no Stats"
         else {
@@ -74,6 +76,7 @@ class PlayersAPI(serializerType: Serializer) {
             else listOfStats
         }
 
+
     @Throws(Exception::class)
     fun save() {
         serializer.write(players)
@@ -85,7 +88,37 @@ class PlayersAPI(serializerType: Serializer) {
         players = serializer.read() as java.util.ArrayList<Player>
         lastId = players.size
     }
+
+    fun numberOfPlayers(): Int {
+        return players.size
+    }
+
+    fun listAllPLayers(): String{
+        if (players.isEmpty()) {
+            "There are no players"
+
+        }
+        return formatListString(players)
+    }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
