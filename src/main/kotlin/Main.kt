@@ -59,6 +59,13 @@ fun add() {
               > --------------------------------
      > ==>> """.trimMargin(">")
     )
+    val isAdded: Boolean = players.add(Player(playerName = playerName, playerSurname = playerSurname, age = age, height = height,weight=weight,position=position))
+
+    if (isAdded) {
+        println("Added Franchise Successfully")
+    } else {
+        println("Add Failed")
+    }
 }
 
     fun listPlayers() {
