@@ -10,7 +10,7 @@ fun menu() : Int {
          |   3. Search Player
          |   4. Delete Player
          |   5. Update Player
-         |   6.Active Player
+         |   6. Active Player
          |Enter Option : """.trimMargin())
     return readLine()!!.toInt()
 }
