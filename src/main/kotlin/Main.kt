@@ -1,7 +1,16 @@
 fun main(args: Array<String>) {
-    println("Hello World!")
+   menu()
+}
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun menu() : Int {
+    print(""" 
+         |---------- Player -------------
+         |   1. Add Player
+         |   2. List Players
+         |   3. Search Player
+         |   4. Delete Player
+         |   5. Update Player
+         |   6.Active Player
+         |Enter Option : """.trimMargin())
+    return readLine()!!.toInt()
 }
