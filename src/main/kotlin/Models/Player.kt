@@ -10,7 +10,7 @@ class Player(
     var height: Double,
     var weight: Double,
     var position: String,
-    var isActivePlayer: Boolean = false
+    var isActivePlayer: Boolean = false,
     var stats: MutableSet<Stat> = mutableSetOf()){
 
     private var lastStatId = 0
