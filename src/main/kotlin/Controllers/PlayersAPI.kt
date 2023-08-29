@@ -73,6 +73,19 @@ class PlayersAPI(serializerType: Serializer) {
             if (listOfStats == "") "No Stats found in Players"
             else listOfStats
         }
+
+    @Throws(Exception::class)
+    fun save() {
+        serializer.write(players)
+    }
+
+    @Throws(Exception::class)
+    fun load() {
+        @Suppress("UNCHECKED_CAST")
+        players = serializer.read() as java.util.ArrayList<Player>
+        lastId = players.size
+    }
 }
+
 
 

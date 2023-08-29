@@ -48,6 +48,9 @@ fun start(){
             9-> deleteStat()
             10->updateStat()
             11->searchStat()
+
+            19->load()
+            20->save()
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
         }
@@ -229,3 +232,21 @@ fun searchStat() {
 
 
 fun listStats() = println(players.listAllStats())
+
+fun save() {
+    try {
+        players.save()
+        println("Save Successful")
+    } catch (e: Exception) {
+        System.err.println("Error writing to file: $e")
+    }
+}
+
+fun load() {
+    try {
+        players.load()
+        println("Load Successful")
+    } catch (e: Exception) {
+        System.err.println("Error reading from file: $e")
+    }
+}
