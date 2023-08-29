@@ -9,8 +9,8 @@ class Stat (var vecesAlBate: Int,
             var strikeOut: Int,
             var walks: Int,
             var statsId: Int = 0,
-            var statAtDate: Boolean = false
-) {
+
+){
 
         // total of hits to calculate the average
         fun totalHits(): Int{
@@ -27,16 +27,17 @@ class Stat (var vecesAlBate: Int,
                 return result
             } else {
                 // Return 0.000 if vecesAlBate is zero or if hits is more than the number at Bats
-                throw IllegalArgumentException("Invalid vecesAlBate or totalHits values")
+                return  0.00
             }
         }
 
 
-        override fun toString(): String {
 
-            return """ 
+    override fun toString(): String {
+
+        return """ 
         
-        |                               Stats
+        |--------------------------- Stats ------------------------------------
         |                                                    Stat ID: ${statsId}         
         |Veces al bate : ${vecesAlBate}
         |
@@ -53,11 +54,6 @@ class Stat (var vecesAlBate: Int,
         |______________________________________________________________________    
         |""".trimMargin("|")
 
-        }
     }
-
-
-
-
-
+}
 
