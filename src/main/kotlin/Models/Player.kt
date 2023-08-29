@@ -1,5 +1,7 @@
 package Models
 
+import models.Stat
+
 class Player(
     var playerId: Int = 0,
     var playerName: String,
@@ -8,7 +10,8 @@ class Player(
     var height: Double,
     var weight: Double,
     var position: String,
-    var isActivePlayer: Boolean = false) {
+    var isActivePlayer: Boolean = false
+    var stats: MutableSet<Stat> = mutableSetOf()){
 
     private var lastStatId = 0
 
@@ -16,6 +19,10 @@ class Player(
         return lastStatId++
     }
 
+    fun add(stat: Stat): Boolean  {
+        stat.statsId = getStatId()
+        return stats.add(stat)
+    }
 
     fun getFullName(): String{
         val fullName = "${playerName} ${playerSurname}"
