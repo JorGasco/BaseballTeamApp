@@ -1,12 +1,14 @@
 package Controllers
 
 import Models.Player
+
+import persistence.Serializer
 import utils.Utilities.formatListString
 import java.util.ArrayList
 
-class PlayersAPI() {
+class PlayersAPI(serializerType: Serializer) {
 
-
+    private var serializer: Serializer = serializerType
 
     private var players = ArrayList<Player>()
 
@@ -59,4 +61,18 @@ class PlayersAPI() {
     fun numberOfPlayers(): Int {
         return players.size
     }
+    fun listAllStats() =
+        if (players.isEmpty()) "There are no Players and no Stats"
+        else {
+            var listOfStats = ""
+            for (player in players) {
+                for (stat in player.stats) {
+                    listOfStats += "${player} \n\t${stat}\n"
+                }
+            }
+            if (listOfStats == "") "No Stats found in Players"
+            else listOfStats
+        }
 }
+
+
