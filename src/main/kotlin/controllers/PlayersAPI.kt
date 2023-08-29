@@ -125,6 +125,13 @@ class PlayersAPI(serializerType: Serializer) {
             else listOfPlayers
         }
     }
+
+    fun averageAge(): String {
+        val totalAge = players.sumBy { it.age }
+        val average = totalAge.toDouble() / players.size
+        return String.format("%.2f", average)
+
+    }
 }
 
 
