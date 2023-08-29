@@ -3,7 +3,7 @@ package Controllers
 import Models.Player
 import java.util.ArrayList
 
-class PlayerAPI() {
+class PlayersAPI() {
 
 
 
@@ -22,6 +22,11 @@ class PlayerAPI() {
 
     fun findOne(id: Int): Player? {
         return players.find { p -> p.playerId == id }
+    }
+
+    fun listAllPLayers() {
+        if (players.isEmpty()) "There are no players"
+        else formatListString(players)
     }
 
     fun delete(id: Int): Boolean {
@@ -48,5 +53,9 @@ class PlayerAPI() {
             return true
         }
         return false
+    }
+
+    fun numberOfPlayers(): Int {
+        return players.size
     }
 }
