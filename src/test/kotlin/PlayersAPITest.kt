@@ -131,4 +131,25 @@ class PlayersAPITest {
             assertEquals(3, populatedPlayers!!.numberOfPlayers())
         }
     }
+
+    @Nested
+    inner class ListPlayers {
+
+        @Test
+        fun `listAllPlayers returns No Players Stored message when ArrayList is empty`() {
+            assertEquals(0, emptyPlayers!!.numberOfPlayers())
+            assertTrue(emptyPlayers!!.listAllPLayers().lowercase().contains("no players"))
+        }
+
+        @Test
+        fun `listAllPlayers returns Players when ArrayList has Players stored`() {
+            assertEquals(5, populatedPlayers!!.numberOfPlayers())
+            val playersString = populatedPlayers!!.listAllPLayers().lowercase()
+            assertTrue(playersString.contains("jorge"))
+            assertTrue(playersString.contains("patty"))
+            assertTrue(playersString.contains("diego"))
+            assertTrue(playersString.contains("dani"))
+            assertTrue(playersString.contains("gabriel"))
+        }
+    }
 }

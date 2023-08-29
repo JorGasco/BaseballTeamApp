@@ -91,13 +91,10 @@ class PlayersAPI(serializerType: Serializer) {
 
 
 
-    fun listAllPLayers(): String {
-        if (players.isEmpty()) {
-            "There are no players"
+    fun listAllPLayers() =
+        if (players.isEmpty()) "There are no players"
+    else formatListString(players)
 
-        }
-        return formatListString(players)
-    }
 
     fun searchByPositions(searchString: String) =
         formatListString(players.filter { player -> player.position.contains(searchString, ignoreCase = true) })
