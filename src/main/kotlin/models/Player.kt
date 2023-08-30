@@ -1,5 +1,7 @@
 package models
 
+import utils.Utilities
+
 data class Player (var playerId: Int = 0,
                    var playerName: String,
                    var playerSurname: String,
@@ -55,6 +57,9 @@ data class Player (var playerId: Int = 0,
         }
         return false
     }
+    fun listStats() =
+        if (stats.isEmpty()) "\tNo Games Added"
+        else Utilities.formatSetString(stats)
 
     fun statSize() = stats.size
 

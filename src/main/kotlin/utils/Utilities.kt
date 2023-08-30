@@ -8,13 +8,7 @@ object Utilities {
         PlayersToFormat
             .joinToString(separator = "\n") { player -> "$player" }
 
-    @JvmStatic
-    fun isArrayList(obj: Any): ArrayList<Player>? = if (obj is ArrayList<*> && obj.all { it is Player }) {
-        @Suppress("UNCHECKED_CAST")
-        obj as ArrayList<Player>
-    } else {
-        null
-    }
+
 
     @JvmStatic
     fun formatSetString(itemsToFormat: Set<Stat>): String =

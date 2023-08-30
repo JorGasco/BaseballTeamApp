@@ -4,7 +4,7 @@ import models.Stat
 import utils.Utilities.formatListString
 
 import persistence.Serializer
-import utils.Utilities.isArrayList
+
 
 import java.util.ArrayList
 

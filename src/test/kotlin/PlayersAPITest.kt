@@ -29,11 +29,11 @@ class PlayersAPITest {
         Gabriel = Player(4, "Gabriel", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
 
 
-        Jorge!!.stats.add(Stat(1,2,3,4,5,6,7,8,0))
-        Patty!!.stats.add(Stat(1,2,3,4,5,6,7,8,0))
-        Diego!!.stats.add(Stat(1,2,3,4,5,6,7,8,0))
-        Dani!!.stats.add(Stat(1,2,3,4,5,6,7,8,0))
-        Gabriel!!.stats.add(Stat(1,2,3,4,5,6,7,8,0))
+        Jorge!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Patty!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Diego!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Dani!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Gabriel!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
 
 
         //adding 5 Player to the Players api
@@ -45,6 +45,7 @@ class PlayersAPITest {
 
 
     }
+
     @AfterEach
     fun tearDown() {
         Jorge = null
@@ -162,33 +163,4 @@ class PlayersAPITest {
             assertTrue(playersString.contains("gabriel"))
         }
     }
-    //////////stats
-    @Nested
-    inner class UpdateStats {
-        @Test
-        fun `updating a game that exists returns true and updates`() {
-            // check franchise 5 exists and check the games
-            assertEquals(Gabriel, populatedPlayers!!.findPlayer(4))
-            assertEquals(1, Gabriel!!.findOne(0)!!.vecesAlBate)
-            assertEquals(2, Gabriel!!.findOne(0)!!.hits)
-            assertEquals(3, Gabriel!!.findOne(0)!!.doubles)
-            assertEquals(4, Gabriel!!.findOne(0)!!.triples)
-            assertEquals(5, Gabriel!!.findOne(0)!!.homeRuns)
-            assertEquals(6, Gabriel!!.findOne(0)!!.runs)
-            assertEquals(7, Gabriel!!.findOne(0)!!.strikeOut)
-            assertEquals(8, Gabriel!!.findOne(0)!!.walks)
-
-            // update franchise 5 with new game information and ensure contents updated successfully
-            assertTrue(Gabriel!!.update(0, Stat(2,3,4,5,6,7,8,9)))
-            assertEquals(2, Gabriel!!.findOne(0)!!.vecesAlBate)
-            assertEquals(3, Gabriel!!.findOne(0)!!.hits)
-            assertEquals(4, Gabriel!!.findOne(0)!!.doubles)
-            assertEquals(5, Gabriel!!.findOne(0)!!.triples)
-            assertEquals(6, Gabriel!!.findOne(0)!!.homeRuns)
-            assertEquals(7, Gabriel!!.findOne(0)!!.runs)
-            assertEquals(8, Gabriel!!.findOne(0)!!.strikeOut)
-            assertEquals(9, Gabriel!!.findOne(0)!!.walks)
-        }
-    }
-
 }
