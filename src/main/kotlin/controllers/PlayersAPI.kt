@@ -1,6 +1,6 @@
 package controllers
 import models.Player
-import models.Stat
+
 import utils.Utilities.formatListString
 
 import persistence.Serializer
@@ -32,8 +32,8 @@ class PlayersAPI(serializerType: Serializer) {
         return players
     }
 
-    fun findOne(id: Int): Player? {
-        return players.find { p -> p.playerId == id }
+    fun findOne(playerId: Int): Player? {
+        return players.find { p -> p.playerId == playerId }
     }
 
     fun delete(id: Int): Boolean {
@@ -85,7 +85,7 @@ class PlayersAPI(serializerType: Serializer) {
     @Throws(Exception::class)
     fun load() {
         @Suppress("UNCHECKED_CAST")
-        players = serializer.read() as java.util.ArrayList<Player>
+        players = serializer.read() as ArrayList<Player>
         lastId = players.size
     }
 
@@ -102,9 +102,8 @@ class PlayersAPI(serializerType: Serializer) {
     fun searchPlayerName(searchString: String) =
         formatListString(players.filter { player -> player.playerName.contains(searchString, ignoreCase = true) })
 
-    fun numberOfPlayers(): Int {
-        return players.size
-    }
+    fun numberOfPlayers()= players.size
+
 
     fun searchHits(searchInt: Int): String {
         return if (numberOfPlayers() == 0) {
@@ -199,11 +198,14 @@ class PlayersAPI(serializerType: Serializer) {
     """.trimMargin("|")
     }
 
-    fun findPlayer(index: Int): Player? {
+    /*fun findPlayer(index: Int): Player? {
         return if (isValidListIndex(index, players)) {
             players[index]
         } else null
-    }
+    }*/
+
+    fun findPlayer(playerId: Int) = players.find { player -> player.playerId == playerId }
+
 
     //utility method to determine if an index is valid in a list.
     fun isValidListIndex(index: Int, list: List<Any>): Boolean {

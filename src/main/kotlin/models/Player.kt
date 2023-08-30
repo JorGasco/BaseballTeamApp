@@ -20,15 +20,18 @@ data class Player (var playerId: Int = 0,
     }
 
 
-    fun addStat(stat: Stat): Boolean  {
+    fun addStat(stat: Stat): Boolean {
+        lastStatId = stats.size
         stat.statsId = getStatId()
         return stats.add(stat)
     }
 
+    fun amountOfStats() = stats.size
 
     fun findOne(id: Int): Stat? {
-        return stats.find { p -> p.statsId == id }
+        return stats.find { stat -> stat.statsId == id }
     }
+
 
     fun delete(id: Int): Boolean {
         val foundStat = findOne(id)

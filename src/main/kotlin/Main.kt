@@ -58,7 +58,7 @@ fun start(){
 
 fun addStats() {
 
-    val player: Player? = getPlayerById()
+    val player: Player? = choosePlayer()
     if (player != null){
         if (player.addStat(Stat(
                 hits = ScannerInput.readNextInt("\t Hits: ") ,
@@ -166,9 +166,9 @@ fun deleteStat() {
 }
 
 fun updateStat() {
-    val player: Player? = getPlayerById()
+    val player: Player? = choosePlayer()
     if (player != null) {
-        val stat: Stat? = getStatsById(player)
+        val stat: Stat? = chooseStat(player)
         if (stat != null) {
             val hits = ScannerInput.readNextInt("Hits: ")
             val vecesAlBate = ScannerInput.readNextInt("Veces al bate: ")
@@ -212,7 +212,7 @@ fun searchStat() {
 internal fun getPlayerById(): Player? {
     print("Enter the Player id to search by: ")
     val playerId = readLine()!!.toInt()
-    return players.findOne(playerId)
+    return players.findPlayer(playerId)
 }
 
 internal fun getStatsById(player: Player): Stat? {
@@ -348,6 +348,29 @@ fun report(){
         """.trimMargin("|"))
 }
 
+
+fun choosePlayer(): Player? {
+    listPlayers()
+    if (players.numberOfPlayers() > 0) {
+        val player = players.findPlayer(ScannerInput.readNextInt("\nEnter the id of the Player: "))
+        if (player != null) {
+            return player
+        } else {
+            println("player id is invalid")
+        }
+    }
+    return null
+}
+
+private fun chooseStat(player: Player): Stat? {
+    if (player.statSize() > 0) {
+        print(player.listStats())
+        return player.findOne(ScannerInput.readNextInt("\nEnter the id of the Stat: "))
+    } else {
+        println("No Stats in chosen Player")
+        return null
+    }
+}
 
 
 
