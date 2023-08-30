@@ -18,7 +18,7 @@ data class Player (var playerId: Int = 0,
     }
 
 
-    fun add(stat: Stat): Boolean  {
+    fun addStat(stat: Stat): Boolean  {
         stat.statsId = getStatId()
         return stats.add(stat)
     }
@@ -56,6 +56,7 @@ data class Player (var playerId: Int = 0,
         return false
     }
 
+    fun statSize() = stats.size
 
 
 

@@ -209,6 +209,20 @@ class PlayersAPI(serializerType: Serializer) {
     fun isValidListIndex(index: Int, list: List<Any>): Boolean {
         return (index >= 0 && index < list.size)
     }
+
+    fun numberOfStats() =
+        if (players.isEmpty()) 0
+        else {
+            var StatAmount = 0
+            for (player in players) {
+                for (Stat in player.stats) {
+                    StatAmount ++
+                }
+            }
+            StatAmount
+        }
+
+
 }
 
 

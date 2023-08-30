@@ -60,7 +60,7 @@ fun addStats() {
 
     val player: Player? = getPlayerById()
     if (player != null){
-        if (player.add(Stat(
+        if (player.addStat(Stat(
                 hits = ScannerInput.readNextInt("\t Hits: ") ,
                 vecesAlBate = ScannerInput.readNextInt("\t Number at Bat: ") ,
                 doubles = ScannerInput.readNextInt("\t Doubles: ") ,
