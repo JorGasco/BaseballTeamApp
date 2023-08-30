@@ -1,5 +1,6 @@
 import controllers.PlayersAPI
 import models.Player
+import models.Stat
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Nested
@@ -28,13 +29,23 @@ class PlayersAPITest {
         Gabriel = Player(4, "Gabriel", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
 
 
+        Jorge!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Patty!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Diego!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Dani!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+        Gabriel!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
+
+
         //adding 5 Player to the Players api
         populatedPlayers!!.add(Jorge!!)
         populatedPlayers!!.add(Patty!!)
         populatedPlayers!!.add(Diego!!)
         populatedPlayers!!.add(Dani!!)
         populatedPlayers!!.add(Gabriel!!)
+
+
     }
+
     @AfterEach
     fun tearDown() {
         Jorge = null
