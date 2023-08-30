@@ -100,7 +100,7 @@ fun menu() : Int {
          |   
          |   12. Search Positions
          |   13. Search Name Player
-         |   14.Search Hits
+         |   14. Search Hits
          |   
          |   15.Total Average
          |   

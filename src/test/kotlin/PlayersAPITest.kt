@@ -152,4 +152,42 @@ class PlayersAPITest {
             assertTrue(playersString.contains("gabriel"))
         }
     }
+
+
+    // PERSISTENCE
+    @Nested
+    inner class PersistenceTests {
+        @Test
+        fun `saving and loading an empty collection in JSON doesn't crash app`() {
+            val storingPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            storingPlayers.save()
+
+            val loadedPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            loadedPlayers.load()
+
+            assertEquals(0, storingPlayers.numberOfPlayers())
+            assertEquals(0, loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.numberOfPlayers(), loadedPlayers.numberOfPlayers())
+        }
+
+        @Test
+        fun `saving and loading an loaded collection in JSON doesn't loose data`() {
+            val storingPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            storingPlayers.add(Jorge!!)
+            storingPlayers.add(Patty!!)
+            storingPlayers.add(Diego!!)
+            storingPlayers.save()
+
+            val loadedPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            loadedPlayers.load()
+
+            assertEquals(3, storingPlayers.numberOfPlayers())
+            assertEquals(3, loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.numberOfPlayers(), loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.findPlayer(0), loadedPlayers.findPlayer(0))
+            assertEquals(storingPlayers.findPlayer(1), loadedPlayers.findPlayer(1))
+            assertEquals(storingPlayers.findPlayer(2), loadedPlayers.findPlayer(2))
+        }
+    }
 }
+
