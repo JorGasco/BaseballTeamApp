@@ -1,7 +1,8 @@
 package models
 
-class Stat (var vecesAlBate: Int,
+class Stat (
             var hits: Int,
+            var vecesAlBate: Int,
             var doubles:Int,
             var triples: Int,
             var homeRuns:Int,
