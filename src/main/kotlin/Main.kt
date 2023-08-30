@@ -212,7 +212,7 @@ fun searchStat() {
 internal fun getPlayerById(): Player? {
     print("Enter the Player id to search by: ")
     val playerId = readLine()!!.toInt()
-    return players.findOne(playerId)
+    return players.findPlayer(playerId)
 }
 
 internal fun getStatsById(player: Player): Stat? {

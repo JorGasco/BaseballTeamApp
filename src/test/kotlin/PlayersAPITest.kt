@@ -163,4 +163,82 @@ class PlayersAPITest {
             assertTrue(playersString.contains("gabriel"))
         }
     }
+//Stats
+
+    @Nested
+    inner class AddStat {
+        @Test
+        fun `adding a Stat to a Player in populated list adds to set`() {
+            val newStat = Stat(8,7,6,5,4,3,2,1,0)
+            assertEquals(5, populatedPlayers!!.numberOfStats())
+            assertTrue(Jorge!!.addStat(newStat))
+            assertEquals(6, populatedPlayers!!.numberOfStats())
+            assertEquals(newStat, Jorge!!.findOne(Jorge!!.statSize() - 1))
+        }
+    }
+@Nested
+inner class UpdateStats {
+    @Test
+    fun `updating a Stat that exists returns true and updates`() {
+        // check franchise 5 exists and check the games
+        assertEquals(Gabriel, populatedPlayers!!.findPlayer(4))
+        assertEquals(1, Gabriel!!.findOne(0)!!.vecesAlBate)
+        assertEquals(2, Gabriel!!.findOne(0)!!.hits)
+        assertEquals(3, Gabriel!!.findOne(0)!!.doubles)
+        assertEquals(4, Gabriel!!.findOne(0)!!.triples)
+        assertEquals(5, Gabriel!!.findOne(0)!!.homeRuns)
+        assertEquals(6, Gabriel!!.findOne(0)!!.runs)
+        assertEquals(7, Gabriel!!.findOne(0)!!.strikeOut)
+        assertEquals(8, Gabriel!!.findOne(0)!!.walks)
+
+        // update franchise 5 with new game information and ensure contents updated successfully
+        assertTrue(Gabriel!!.update(0, Stat(2, 3, 4, 5, 6, 7, 8, 9)))
+        assertEquals(2, Gabriel!!.findOne(0)!!.vecesAlBate)
+        assertEquals(3, Gabriel!!.findOne(0)!!.hits)
+        assertEquals(4, Gabriel!!.findOne(0)!!.doubles)
+        assertEquals(5, Gabriel!!.findOne(0)!!.triples)
+        assertEquals(6, Gabriel!!.findOne(0)!!.homeRuns)
+        assertEquals(7, Gabriel!!.findOne(0)!!.runs)
+        assertEquals(8, Gabriel!!.findOne(0)!!.strikeOut)
+        assertEquals(9, Gabriel!!.findOne(0)!!.walks)
+    }
 }
+
+    // PERSISTENCE
+    @Nested
+    inner class PersistenceTests {
+        @Test
+        fun `saving and loading an empty collection in JSON doesn't crash app`() {
+            val storingPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            storingPlayers.save()
+
+            val loadedPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            loadedPlayers.load()
+
+            assertEquals(0, storingPlayers.numberOfPlayers())
+            assertEquals(0, loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.numberOfPlayers(), loadedPlayers.numberOfPlayers())
+        }
+
+        @Test
+        fun `saving and loading an loaded collection in JSON doesn't loose data`() {
+            val storingPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            storingPlayers.add(Jorge!!)
+            storingPlayers.add(Patty!!)
+            storingPlayers.add(Diego!!)
+            storingPlayers.save()
+
+            val loadedPlayers = PlayersAPI(JSONSerializer(File("players.json")))
+            loadedPlayers.load()
+
+            assertEquals(3, storingPlayers.numberOfPlayers())
+            assertEquals(3, loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.numberOfPlayers(), loadedPlayers.numberOfPlayers())
+            assertEquals(storingPlayers.findPlayer(0), loadedPlayers.findPlayer(0))
+            assertEquals(storingPlayers.findPlayer(1), loadedPlayers.findPlayer(1))
+            assertEquals(storingPlayers.findPlayer(2), loadedPlayers.findPlayer(2))
+        }
+
+    }
+}
+

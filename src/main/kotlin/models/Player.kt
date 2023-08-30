@@ -25,10 +25,12 @@ data class Player (var playerId: Int = 0,
         return stats.add(stat)
     }
 
+    fun amountOfStats() = stats.size
 
     fun findOne(id: Int): Stat? {
-        return stats.find { p -> p.statsId == id }
+        return stats.find { stat -> stat.statsId == id }
     }
+
 
     fun delete(id: Int): Boolean {
         val foundStat = findOne(id)
