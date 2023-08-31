@@ -25,38 +25,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v3
 
-      # Runs the Gradle build task, but without running the JUnit tests
+      # Runs a single command using the runners shell
+
+      # Runs the Gradle build task
       - name: Run the Gradle Build
-        run: ./gradlew build -x test
+        run: ./gradlew build
 
-      # Builds a 'fat' jar file with the dependencies from Gradle
-      - name: Archive Jar with Dependencies
-        uses: actions/upload-artifact@v2
-        with:
-          name: Jar with Dependencies
-          path: build/libs
-  test: 
-    runs-on: ubuntu-latest
-    needs: build
-    steps:
-
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it   
-      - uses: actions/checkout@v2
-
-      # Runs the Gradle test task
-      - name: Test with Gradle
-        run: ./gradlew test --tests "*"
-
-      # Builds a zip file with JUnit test report in it    
-      - name: Archive test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: Test report
-          path: build/reports/tests/test
-
-      # Builds a zip file with JUnit code coveage report in it    
-      - name: Archive coverage report
-        uses: actions/upload-artifact@v2
-        with:
-          name: Code Coverage report
-          path: build/reports/jacoco/test/html
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
