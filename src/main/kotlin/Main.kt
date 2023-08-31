@@ -88,7 +88,7 @@ fun menu(): Int {
          |   10. Update Stat
          |   11. Search Stat
          |   
-         |   -----------------------------
+         |   ----------------------------
          |   
          |   12. Search Positions
          |   13. Search Name Player
