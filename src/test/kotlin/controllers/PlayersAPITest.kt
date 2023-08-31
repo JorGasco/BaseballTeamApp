@@ -35,14 +35,12 @@ class PlayersAPITest {
         Dani!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
         Gabriel!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
 
-        //adding 5 Player to the Players api
+        // adding 5 Player to the Players api
         populatedPlayers!!.add(Jorge!!)
         populatedPlayers!!.add(Patty!!)
         populatedPlayers!!.add(Diego!!)
         populatedPlayers!!.add(Dani!!)
         populatedPlayers!!.add(Gabriel!!)
-
-
     }
 
     @AfterEach
@@ -69,7 +67,6 @@ class PlayersAPITest {
     @Test
     fun `adding a Player to an empty list adds to ArrayList`() {
         val newPlayer = Player(0, "New", "Player", 25, 25.00, 25.00, "outfield", false)
-
 
         assertEquals(0, emptyPlayers!!.numberOfPlayers())
         assertTrue(emptyPlayers!!.add(newPlayer))
@@ -162,8 +159,4 @@ class PlayersAPITest {
             assertTrue(playersString.contains("gabriel"))
         }
     }
-
-
-
 }
-

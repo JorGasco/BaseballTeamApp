@@ -27,14 +27,12 @@ class persistenceTest {
         Dani = Player(3, "Dani", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
         Gabriel = Player(4, "Gabriel", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
 
-        //adding 5 Player to the Players api
+        // adding 5 Player to the Players api
         populatedPlayers!!.add(Jorge!!)
         populatedPlayers!!.add(Patty!!)
         populatedPlayers!!.add(Diego!!)
         populatedPlayers!!.add(Dani!!)
         populatedPlayers!!.add(Gabriel!!)
-
-
     }
 
     @AfterEach
@@ -81,6 +79,5 @@ class persistenceTest {
             assertEquals(storingPlayers.findPlayer(1), loadedPlayers.findPlayer(1))
             assertEquals(storingPlayers.findPlayer(2), loadedPlayers.findPlayer(2))
         }
-
     }
 }

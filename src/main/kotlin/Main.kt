@@ -3,9 +3,7 @@ import models.Player
 import models.Stat
 import persistence.JSONSerializer
 import utils.ScannerInput
-
 import java.io.File
-
 
 private val players = PlayersAPI(JSONSerializer(File("players.json")))
 
@@ -13,41 +11,34 @@ fun main(args: Array<String>) {
     start()
 }
 
-fun start(){
-    var input : Int
+fun start() {
+    var input: Int
 
     do {
         input = menu()
         when (input) {
             1 -> add()
-            2-> listPlayers()
-            3-> search()
-            4-> deletePlayer()
-            5-> updatePlayer()
-            //6-> setPlayerActivity()
+            2 -> listPlayers()
+            3 -> search()
+            4 -> deletePlayer()
+            5 -> updatePlayer()
+            // 6-> setPlayerActivity()
 
+            7 -> addStats()
+            8 -> listStats()
+            9 -> deleteStat()
+            10 -> updateStat()
+            11 -> searchStat()
 
-            7-> addStats()
-            8-> listStats()
-            9-> deleteStat()
-            10->updateStat()
-            11->searchStat()
+            12 -> searchPositions()
+            13 -> searchPlayerByName()
+            14 -> searchStatsByHits()
 
+            15 -> report()
 
-            12->searchPositions()
-            13-> searchPlayerByName()
-            14->searchStatsByHits()
-
-            15->report()
-
-
-
-
-            19->load()
-            20->save()
-            21-> dummyData()
-
-
+            19 -> load()
+            20 -> save()
+            21 -> dummyData()
 
             -1 -> println("Exiting App")
             else -> println("Invalid Option")
@@ -59,17 +50,18 @@ fun start(){
 fun addStats() {
 
     val player: Player? = choosePlayer()
-    if (player != null){
-        if (player.addStat(Stat(
-                hits = ScannerInput.readNextInt("\t Hits: ") ,
-                vecesAlBate = ScannerInput.readNextInt("\t Number at Bat: ") ,
-                doubles = ScannerInput.readNextInt("\t Doubles: ") ,
-                triples = ScannerInput.readNextInt("\t Triples: ") ,
-                homeRuns = ScannerInput.readNextInt("\t HomeRuns: ") ,
-                strikeOut = ScannerInput.readNextInt("\t StrikeOuts: "),
-                walks = ScannerInput.readNextInt("\t Walks: "),
-                runs = ScannerInput.readNextInt("\t Runs: ")
-            )
+    if (player != null) {
+        if (player.addStat(
+                Stat(
+                        hits = ScannerInput.readNextInt("\t Hits: "),
+                        vecesAlBate = ScannerInput.readNextInt("\t Number at Bat: "),
+                        doubles = ScannerInput.readNextInt("\t Doubles: "),
+                        triples = ScannerInput.readNextInt("\t Triples: "),
+                        homeRuns = ScannerInput.readNextInt("\t HomeRuns: "),
+                        strikeOut = ScannerInput.readNextInt("\t StrikeOuts: "),
+                        walks = ScannerInput.readNextInt("\t Walks: "),
+                        runs = ScannerInput.readNextInt("\t Runs: ")
+                    )
             )
         )
             println("Added Successfully!")
@@ -79,8 +71,9 @@ fun addStats() {
 
 fun listStats() = println(players.listAllStats())
 
-fun menu() : Int {
-    print(""" 
+fun menu(): Int {
+    print(
+        """ 
          |---------- Player -------------
          |   1. Add Player
          |   2. List Players
@@ -111,18 +104,18 @@ fun menu() : Int {
          |   
          |   
          |   
-         |Enter Option : """.trimMargin())
+         |Enter Option : """.trimMargin()
+    )
     return readLine()!!.toInt()
 }
 
 fun add() {
 
-
-    val playerName  = ScannerInput.readNextLine("First Name: ")
-    val playerSurname  = ScannerInput.readNextLine("Surname: ")
-    val age  = ScannerInput.readNextInt("age: ")
-    val height  = ScannerInput.readNextDouble("Please enter Height between 0.01 - 3.00: ")
-    val weight  = ScannerInput.readNextDouble("weight:")
+    val playerName = ScannerInput.readNextLine("First Name: ")
+    val playerSurname = ScannerInput.readNextLine("Surname: ")
+    val age = ScannerInput.readNextInt("age: ")
+    val height = ScannerInput.readNextDouble("Please enter Height between 0.01 - 3.00: ")
+    val weight = ScannerInput.readNextDouble("weight:")
     val position = ScannerInput.readNextLine(
         """
               > --------------------------------
@@ -134,7 +127,7 @@ fun add() {
      > ==>> """.trimMargin(">")
     )
 
-    val isAdded: Boolean = players.add(Player(playerName = playerName, playerSurname = playerSurname, age = age, height = height,weight=weight,position=position))
+    val isAdded: Boolean = players.add(Player(playerName = playerName, playerSurname = playerSurname, age = age, height = height, weight = weight, position = position))
 
     if (isAdded) {
         println("Added Player Successfully")
@@ -143,9 +136,7 @@ fun add() {
     }
 }
 
-
-
-fun listPlayers(){
+fun listPlayers() {
 
     println(players.listAllPLayers())
 }
@@ -179,14 +170,20 @@ fun updateStat() {
             val walks = ScannerInput.readNextInt("\t Walks: ")
             val runs = ScannerInput.readNextInt("\t Runs: ")
 
-            if (player.update(stat.statsId, Stat(hits = hits,
-                    vecesAlBate = vecesAlBate,
-                    doubles = doubles,
-                    triples = triples,
-                    homeRuns = homeRuns,
-                    strikeOut = strikeOut,
-                    walks = walks,
-                    runs = runs))) {
+            if (player.update(
+                    stat.statsId,
+                    Stat(
+                            hits = hits,
+                            vecesAlBate = vecesAlBate,
+                            doubles = doubles,
+                            triples = triples,
+                            homeRuns = homeRuns,
+                            strikeOut = strikeOut,
+                            walks = walks,
+                            runs = runs
+                        )
+                )
+            ) {
                 println("Stats updated")
             } else {
                 println("Stats NOT updated")
@@ -204,10 +201,9 @@ fun searchStat() {
         val stat: Stat? = getStatsById(player)
         if (stat != null) {
             println(stat)
-        }else println("stat NOT updated")
-    }else println("ID NOT ")
+        } else println("stat NOT updated")
+    } else println("ID NOT ")
 }
-
 
 internal fun getPlayerById(): Player? {
     print("Enter the Player id to search by: ")
@@ -221,7 +217,6 @@ internal fun getStatsById(player: Player): Stat? {
     return player.findOne(statId)
 }
 
-
 fun search() {
     val player = getPlayerById()
     if (player == null)
@@ -231,10 +226,9 @@ fun search() {
 }
 
 fun dummyData() {
-    players.add(Player(0,"Jorge","Gasco",25,25.00,25.00,"outfield"))
-    players.add(Player(1,"Diego","Gasco",25,25.00,25.00,"infield"))
-    players.add(Player(2,"Patty","Gasco",25,25.00,25.00,"Pitcher"))
-
+    players.add(Player(0, "Jorge", "Gasco", 25, 25.00, 25.00, "outfield"))
+    players.add(Player(1, "Diego", "Gasco", 25, 25.00, 25.00, "infield"))
+    players.add(Player(2, "Patty", "Gasco", 25, 25.00, 25.00, "Pitcher"))
 }
 
 fun deletePlayer() {
@@ -276,14 +270,6 @@ fun updatePlayer() {
         }
     }
 }
-
-
-
-
-
-
-
-
 
 fun save() {
     try {
@@ -333,8 +319,9 @@ fun searchStatsByHits() {
     }
 }
 
-fun report(){
-    println("""
+fun report() {
+    println(
+        """
         |______________________________________________________________________
         |                               Team Stats 
         |                               
@@ -345,9 +332,9 @@ fun report(){
         |${players.averagePlayerStats()}
         |
         |______________________________________________________________________    
-        """.trimMargin("|"))
+        """.trimMargin("|")
+    )
 }
-
 
 fun choosePlayer(): Player? {
     listPlayers()
@@ -371,20 +358,3 @@ private fun chooseStat(player: Player): Stat? {
         return null
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -2,7 +2,6 @@ package persistence
 
 import com.thoughtworks.xstream.XStream
 import com.thoughtworks.xstream.io.json.JettisonMappedXmlDriver
-
 import models.Player
 import models.Stat
 import java.io.File

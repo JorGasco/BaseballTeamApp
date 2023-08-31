@@ -1,0 +1,361 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Main.kt</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">BaseballTeamApp</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Main.kt</span></div><h1>Main.kt</h1><pre class="source lang-java linenums">import controllers.PlayersAPI
+import models.Player
+import models.Stat
+import persistence.JSONSerializer
+import utils.ScannerInput
+import java.io.File
+
+<span class="nc" id="L8">private val players = PlayersAPI(JSONSerializer(File(&quot;players.json&quot;)))</span>
+
+fun main(args: Array&lt;String&gt;) {
+<span class="nc" id="L11">    start()</span>
+<span class="nc" id="L12">}</span>
+
+fun start() {
+    var input: Int
+
+    do {
+<span class="nc" id="L18">        input = menu()</span>
+<span class="nc bnc" id="L19" title="All 19 branches missed.">        when (input) {</span>
+<span class="nc" id="L20">            1 -&gt; add()</span>
+<span class="nc" id="L21">            2 -&gt; listPlayers()</span>
+<span class="nc" id="L22">            3 -&gt; search()</span>
+<span class="nc" id="L23">            4 -&gt; deletePlayer()</span>
+<span class="nc" id="L24">            5 -&gt; updatePlayer()</span>
+            // 6-&gt; setPlayerActivity()
+
+<span class="nc" id="L27">            7 -&gt; addStats()</span>
+<span class="nc" id="L28">            8 -&gt; listStats()</span>
+<span class="nc" id="L29">            9 -&gt; deleteStat()</span>
+<span class="nc" id="L30">            10 -&gt; updateStat()</span>
+<span class="nc" id="L31">            11 -&gt; searchStat()</span>
+
+<span class="nc" id="L33">            12 -&gt; searchPositions()</span>
+<span class="nc" id="L34">            13 -&gt; searchPlayerByName()</span>
+<span class="nc" id="L35">            14 -&gt; searchStatsByHits()</span>
+
+<span class="nc" id="L37">            15 -&gt; report()</span>
+
+<span class="nc" id="L39">            19 -&gt; load()</span>
+<span class="nc" id="L40">            20 -&gt; save()</span>
+<span class="nc" id="L41">            21 -&gt; dummyData()</span>
+
+<span class="nc" id="L43">            -1 -&gt; println(&quot;Exiting App&quot;)</span>
+<span class="nc" id="L44">            else -&gt; println(&quot;Invalid Option&quot;)</span>
+        }
+<span class="nc" id="L46">        println()</span>
+<span class="nc bnc" id="L47" title="All 2 branches missed.">    } while (input != -1)</span>
+<span class="nc" id="L48">}</span>
+
+fun addStats() {
+
+<span class="nc" id="L52">    val player: Player? = choosePlayer()</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">    if (player != null) {</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">        if (player.addStat(</span>
+<span class="nc" id="L55">                Stat(</span>
+<span class="nc" id="L56">                        hits = ScannerInput.readNextInt(&quot;\t Hits: &quot;),</span>
+<span class="nc" id="L57">                        vecesAlBate = ScannerInput.readNextInt(&quot;\t Number at Bat: &quot;),</span>
+<span class="nc" id="L58">                        doubles = ScannerInput.readNextInt(&quot;\t Doubles: &quot;),</span>
+<span class="nc" id="L59">                        triples = ScannerInput.readNextInt(&quot;\t Triples: &quot;),</span>
+<span class="nc" id="L60">                        homeRuns = ScannerInput.readNextInt(&quot;\t HomeRuns: &quot;),</span>
+<span class="nc" id="L61">                        strikeOut = ScannerInput.readNextInt(&quot;\t StrikeOuts: &quot;),</span>
+<span class="nc" id="L62">                        walks = ScannerInput.readNextInt(&quot;\t Walks: &quot;),</span>
+<span class="nc" id="L63">                        runs = ScannerInput.readNextInt(&quot;\t Runs: &quot;)</span>
+                    )
+            )
+        )
+<span class="nc" id="L67">            println(&quot;Added Successfully!&quot;)</span>
+<span class="nc" id="L68">        else println(&quot;Add NOT Successful&quot;)</span>
+    }
+<span class="nc" id="L70">}</span>
+
+<span class="nc" id="L72">fun listStats() = println(players.listAllStats())</span>
+
+fun menu(): Int {
+<span class="nc" id="L75">    print(</span>
+        &quot;&quot;&quot; 
+         |---------- Player -------------
+         |   1. Add Player
+         |   2. List Players
+         |   3. Search Player
+         |   4. Delete Player
+         |   5. Update Player
+         |   6.Active Player
+         |   
+         |--------- Stats ---------------
+         |   7. Add Stat
+         |   8. List Stats
+         |   9. Delete Stat
+         |   10.Update Stat
+         |   11. Search Stat
+         |   
+         |   -----------------------------
+         |   
+         |   12. Search Positions
+         |   13. Search Name Player
+         |   14.Search Hits
+         |   
+         |   15.Total Average
+         |   
+         |   19. Load
+         |   20. Save
+         |   
+         |   21. Dummy data
+         |   
+         |   
+         |   
+<span class="nc" id="L107">         |Enter Option : &quot;&quot;&quot;.trimMargin()</span>
+    )
+<span class="nc" id="L109">    return readLine()!!.toInt()</span>
+}
+
+fun add() {
+
+<span class="nc" id="L114">    val playerName = ScannerInput.readNextLine(&quot;First Name: &quot;)</span>
+<span class="nc" id="L115">    val playerSurname = ScannerInput.readNextLine(&quot;Surname: &quot;)</span>
+<span class="nc" id="L116">    val age = ScannerInput.readNextInt(&quot;age: &quot;)</span>
+<span class="nc" id="L117">    val height = ScannerInput.readNextDouble(&quot;Please enter Height between 0.01 - 3.00: &quot;)</span>
+<span class="nc" id="L118">    val weight = ScannerInput.readNextDouble(&quot;weight:&quot;)</span>
+<span class="nc" id="L119">    val position = ScannerInput.readNextLine(</span>
+        &quot;&quot;&quot;
+              &gt; --------------------------------
+              &gt; | Write the position            |
+              &gt; |   1 - Infield                 |
+              &gt; |   2 - OutField                |
+              &gt; |   3 - Pitcher                 |
+              &gt; --------------------------------
+<span class="nc" id="L127">     &gt; ==&gt;&gt; &quot;&quot;&quot;.trimMargin(&quot;&gt;&quot;)</span>
+    )
+
+<span class="nc" id="L130">    val isAdded: Boolean = players.add(Player(playerName = playerName, playerSurname = playerSurname, age = age, height = height, weight = weight, position = position))</span>
+
+<span class="nc bnc" id="L132" title="All 2 branches missed.">    if (isAdded) {</span>
+<span class="nc" id="L133">        println(&quot;Added Player Successfully&quot;)</span>
+    } else {
+<span class="nc" id="L135">        println(&quot;Add Failed&quot;)</span>
+    }
+<span class="nc" id="L137">}</span>
+
+fun listPlayers() {
+
+<span class="nc" id="L141">    println(players.listAllPLayers())</span>
+<span class="nc" id="L142">}</span>
+
+fun deleteStat() {
+<span class="nc" id="L145">    val player: Player? = getPlayerById()</span>
+<span class="nc bnc" id="L146" title="All 2 branches missed.">    if (player != null) {</span>
+<span class="nc" id="L147">        val stat: Stat? = getStatsById(player)</span>
+<span class="nc bnc" id="L148" title="All 2 branches missed.">        if (stat != null) {</span>
+<span class="nc" id="L149">            val isDeleted = player.delete(stat.statsId)</span>
+<span class="nc bnc" id="L150" title="All 2 branches missed.">            if (isDeleted) {</span>
+<span class="nc" id="L151">                println(&quot;Delete Successful!&quot;)</span>
+            } else {
+<span class="nc" id="L153">                println(&quot;Delete NOT Successful&quot;)</span>
+            }
+        }
+    }
+<span class="nc" id="L157">}</span>
+
+fun updateStat() {
+<span class="nc" id="L160">    val player: Player? = choosePlayer()</span>
+<span class="nc bnc" id="L161" title="All 2 branches missed.">    if (player != null) {</span>
+<span class="nc" id="L162">        val stat: Stat? = chooseStat(player)</span>
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        if (stat != null) {</span>
+<span class="nc" id="L164">            val hits = ScannerInput.readNextInt(&quot;Hits: &quot;)</span>
+<span class="nc" id="L165">            val vecesAlBate = ScannerInput.readNextInt(&quot;Veces al bate: &quot;)</span>
+<span class="nc" id="L166">            val doubles = ScannerInput.readNextInt(&quot;\t Doubles: &quot;)</span>
+<span class="nc" id="L167">            val triples = ScannerInput.readNextInt(&quot;\t Triples: &quot;)</span>
+<span class="nc" id="L168">            val homeRuns = ScannerInput.readNextInt(&quot;\t HomeRuns: &quot;)</span>
+<span class="nc" id="L169">            val strikeOut = ScannerInput.readNextInt(&quot;\t StrikeOuts: &quot;)</span>
+<span class="nc" id="L170">            val walks = ScannerInput.readNextInt(&quot;\t Walks: &quot;)</span>
+<span class="nc" id="L171">            val runs = ScannerInput.readNextInt(&quot;\t Runs: &quot;)</span>
+
+<span class="nc bnc" id="L173" title="All 2 branches missed.">            if (player.update(</span>
+<span class="nc" id="L174">                    stat.statsId,</span>
+<span class="nc" id="L175">                    Stat(</span>
+<span class="nc" id="L176">                            hits = hits,</span>
+<span class="nc" id="L177">                            vecesAlBate = vecesAlBate,</span>
+<span class="nc" id="L178">                            doubles = doubles,</span>
+<span class="nc" id="L179">                            triples = triples,</span>
+<span class="nc" id="L180">                            homeRuns = homeRuns,</span>
+<span class="nc" id="L181">                            strikeOut = strikeOut,</span>
+<span class="nc" id="L182">                            walks = walks,</span>
+<span class="nc" id="L183">                            runs = runs</span>
+                        )
+                )
+            ) {
+<span class="nc" id="L187">                println(&quot;Stats updated&quot;)</span>
+            } else {
+<span class="nc" id="L189">                println(&quot;Stats NOT updated&quot;)</span>
+            }
+        } else {
+<span class="nc" id="L192">            println(&quot;Invalid Stats Id&quot;)</span>
+        }
+    }
+<span class="nc" id="L195">}</span>
+
+fun searchStat() {
+
+<span class="nc" id="L199">    val player = getPlayerById()</span>
+<span class="nc bnc" id="L200" title="All 2 branches missed.">    if (player != null) {</span>
+<span class="nc" id="L201">        val stat: Stat? = getStatsById(player)</span>
+<span class="nc bnc" id="L202" title="All 2 branches missed.">        if (stat != null) {</span>
+<span class="nc" id="L203">            println(stat)</span>
+<span class="nc" id="L204">        } else println(&quot;stat NOT updated&quot;)</span>
+<span class="nc" id="L205">    } else println(&quot;ID NOT &quot;)</span>
+<span class="nc" id="L206">}</span>
+
+internal fun getPlayerById(): Player? {
+<span class="nc" id="L209">    print(&quot;Enter the Player id to search by: &quot;)</span>
+<span class="nc" id="L210">    val playerId = readLine()!!.toInt()</span>
+<span class="nc" id="L211">    return players.findPlayer(playerId)</span>
+}
+
+internal fun getStatsById(player: Player): Stat? {
+<span class="nc" id="L215">    print(&quot;Enter the Stat id to search by: &quot;)</span>
+<span class="nc" id="L216">    val statId = readLine()!!.toInt()</span>
+<span class="nc" id="L217">    return player.findOne(statId)</span>
+}
+
+fun search() {
+<span class="nc" id="L221">    val player = getPlayerById()</span>
+<span class="nc bnc" id="L222" title="All 2 branches missed.">    if (player == null)</span>
+<span class="nc" id="L223">        println(&quot;No employee found&quot;)</span>
+    else
+<span class="nc" id="L225">        println(player)</span>
+<span class="nc" id="L226">}</span>
+
+fun dummyData() {
+<span class="nc" id="L229">    players.add(Player(0, &quot;Jorge&quot;, &quot;Gasco&quot;, 25, 25.00, 25.00, &quot;outfield&quot;))</span>
+<span class="nc" id="L230">    players.add(Player(1, &quot;Diego&quot;, &quot;Gasco&quot;, 25, 25.00, 25.00, &quot;infield&quot;))</span>
+<span class="nc" id="L231">    players.add(Player(2, &quot;Patty&quot;, &quot;Gasco&quot;, 25, 25.00, 25.00, &quot;Pitcher&quot;))</span>
+<span class="nc" id="L232">}</span>
+
+fun deletePlayer() {
+<span class="nc" id="L235">    val player = getPlayerById()</span>
+
+<span class="nc bnc" id="L237" title="All 2 branches missed.">    if (player != null) {</span>
+<span class="nc" id="L238">        val deleted = players.delete(player.playerId)</span>
+
+<span class="nc bnc" id="L240" title="All 2 branches missed.">        if (deleted) {</span>
+<span class="nc" id="L241">            println(&quot;Player deleted successfully.&quot;)</span>
+        } else {
+<span class="nc" id="L243">            println(&quot;Failed to delete Player. Player not found.&quot;)</span>
+        }
+    } else {
+<span class="nc" id="L246">        println(&quot;Player not found.&quot;)</span>
+    }
+<span class="nc" id="L248">}</span>
+
+fun updatePlayer() {
+
+<span class="nc bnc" id="L252" title="All 2 branches missed.">    if (players.numberOfPlayers() &gt; 0) {</span>
+<span class="nc" id="L253">        val id = ScannerInput.readNextInt(&quot;Enter the id of the player to update: &quot;)</span>
+<span class="nc bnc" id="L254" title="All 2 branches missed.">        if (players.findOne(id) != null) {</span>
+
+<span class="nc" id="L256">            val playerName = ScannerInput.readNextLine(&quot;First Name: &quot;)</span>
+<span class="nc" id="L257">            val playerSurname = ScannerInput.readNextLine(&quot;Surname: &quot;)</span>
+<span class="nc" id="L258">            val age = ScannerInput.readNextInt(&quot;age: &quot;)</span>
+<span class="nc" id="L259">            val height = ScannerInput.readNextDouble(&quot;height: &quot;)</span>
+<span class="nc" id="L260">            val weight = ScannerInput.readNextDouble(&quot;weight:&quot;)</span>
+<span class="nc" id="L261">            val position = ScannerInput.readNextLine(&quot;position:&quot;)</span>
+
+<span class="nc bnc" id="L263" title="All 2 branches missed.">            if (players.update(id, Player(0, playerName, playerSurname, age, height, weight, position))) {</span>
+<span class="nc" id="L264">                println(&quot;Update Successful&quot;)</span>
+            } else {
+<span class="nc" id="L266">                println(&quot;Update Failed&quot;)</span>
+            }
+        } else {
+<span class="nc" id="L269">            println(&quot;There are no players for this index number&quot;)</span>
+        }
+    }
+<span class="nc" id="L272">}</span>
+
+fun save() {
+<span class="nc" id="L275">    try {</span>
+<span class="nc" id="L276">        players.save()</span>
+<span class="nc" id="L277">        println(&quot;Save Successful&quot;)</span>
+<span class="nc" id="L278">    } catch (e: Exception) {</span>
+<span class="nc" id="L279">        System.err.println(&quot;Error writing to file: $e&quot;)</span>
+    }
+<span class="nc" id="L281">}</span>
+
+fun load() {
+<span class="nc" id="L284">    try {</span>
+<span class="nc" id="L285">        players.load()</span>
+<span class="nc" id="L286">        println(&quot;Load Successful&quot;)</span>
+<span class="nc" id="L287">    } catch (e: Exception) {</span>
+<span class="nc" id="L288">        System.err.println(&quot;Error reading from file: $e&quot;)</span>
+    }
+<span class="nc" id="L290">}</span>
+
+fun searchPositions() {
+<span class="nc" id="L293">    val searchPositions = ScannerInput.readNextLine(&quot;Enter the Name to search by: &quot;)</span>
+<span class="nc" id="L294">    val searchResults = players.searchByPositions(searchPositions)</span>
+<span class="nc bnc" id="L295" title="All 4 branches missed.">    if (searchResults.isEmpty()) {</span>
+<span class="nc" id="L296">        println(&quot;No Players found&quot;)</span>
+    } else {
+<span class="nc" id="L298">        println(searchResults)</span>
+    }
+<span class="nc" id="L300">}</span>
+
+fun searchPlayerByName() {
+<span class="nc" id="L303">    val searchName = ScannerInput.readNextLine(&quot;Enter the Name of Player to search for: &quot;)</span>
+<span class="nc" id="L304">    val searchResults = players.searchPlayerName(searchName)</span>
+<span class="nc bnc" id="L305" title="All 4 branches missed.">    if (searchResults.isEmpty()) {</span>
+<span class="nc" id="L306">        println(&quot;No Players of that publisher found&quot;)</span>
+    } else {
+<span class="nc" id="L308">        println(searchResults)</span>
+    }
+<span class="nc" id="L310">}</span>
+
+fun searchStatsByHits() {
+<span class="nc" id="L313">    val searchHits = ScannerInput.readNextInt(&quot;Enter Hits of Stat to search for: &quot;)</span>
+<span class="nc" id="L314">    val searchResults = players.searchHits(searchHits)</span>
+<span class="nc bnc" id="L315" title="All 4 branches missed.">    if (searchResults.isEmpty()) {</span>
+<span class="nc" id="L316">        println(&quot;No Hits &quot;)</span>
+    } else {
+<span class="nc" id="L318">        println(searchResults)</span>
+    }
+<span class="nc" id="L320">}</span>
+
+fun report() {
+<span class="nc" id="L323">    println(</span>
+<span class="nc" id="L324">        &quot;&quot;&quot;</span>
+        |______________________________________________________________________
+        |                               Team Stats 
+        |                               
+<span class="nc" id="L328">        |Average Age:${players.averageAge()} Years old                                     </span>
+<span class="nc" id="L329">        |Average Height : ${players.averageHeight()} Meters               </span>
+<span class="nc" id="L330">        |Average Weight : ${players.averageWeight()}  Kg</span>
+        |                 
+<span class="nc" id="L332">        |${players.averagePlayerStats()}</span>
+        |
+        |______________________________________________________________________    
+<span class="nc" id="L335">        &quot;&quot;&quot;.trimMargin(&quot;|&quot;)</span>
+    )
+<span class="nc" id="L337">}</span>
+
+fun choosePlayer(): Player? {
+<span class="nc" id="L340">    listPlayers()</span>
+<span class="nc bnc" id="L341" title="All 2 branches missed.">    if (players.numberOfPlayers() &gt; 0) {</span>
+<span class="nc" id="L342">        val player = players.findPlayer(ScannerInput.readNextInt(&quot;\nEnter the id of the Player: &quot;))</span>
+<span class="nc bnc" id="L343" title="All 2 branches missed.">        if (player != null) {</span>
+<span class="nc" id="L344">            return player</span>
+        } else {
+<span class="nc" id="L346">            println(&quot;player id is invalid&quot;)</span>
+        }
+    }
+<span class="nc" id="L349">    return null</span>
+}
+
+private fun chooseStat(player: Player): Stat? {
+<span class="nc bnc" id="L353" title="All 2 branches missed.">    if (player.statSize() &gt; 0) {</span>
+<span class="nc" id="L354">        print(player.listStats())</span>
+<span class="nc" id="L355">        return player.findOne(ScannerInput.readNextInt(&quot;\nEnter the id of the Stat: &quot;))</span>
+    } else {
+<span class="nc" id="L357">        println(&quot;No Stats in chosen Player&quot;)</span>
+<span class="nc" id="L358">        return null</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

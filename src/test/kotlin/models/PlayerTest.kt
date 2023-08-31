@@ -29,9 +29,7 @@ class PlayerTest {
         Diego = Player(2, "Diego", "Gasco", 25, 25.00, 25.00, "outfield", false)
         Dani = Player(3, "Dani", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
         Gabriel = Player(4, "Gabriel", "Gasco", 25, 25.00, 25.00, "Pitcher", false)
-       // added for the list
-
-
+        // added for the list
 
         Jorge!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
         Patty!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
@@ -39,7 +37,7 @@ class PlayerTest {
         Dani!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
         Gabriel!!.stats.add(Stat(1, 2, 3, 4, 5, 6, 7, 8, 0))
 
-        //adding 5 Player to the Players api
+        // adding 5 Player to the Players api
         populatedPlayers!!.add(Jorge!!)
         populatedPlayers!!.add(Patty!!)
         populatedPlayers!!.add(Diego!!)
@@ -47,16 +45,16 @@ class PlayerTest {
         populatedPlayers!!.add(Gabriel!!)
     }
 
-        @AfterEach
-        fun tearDown() {
-            Jorge = null
-            Patty = null
-            Diego = null
-            Dani = null
-            Gabriel = null
-            populatedPlayers = null
-            emptyPlayers = null
-        }
+    @AfterEach
+    fun tearDown() {
+        Jorge = null
+        Patty = null
+        Diego = null
+        Dani = null
+        Gabriel = null
+        populatedPlayers = null
+        emptyPlayers = null
+    }
     @Nested
     inner class AddStat {
         @Test
@@ -90,7 +88,6 @@ class PlayerTest {
             assertEquals(7, Gabriel!!.findOne(0)!!.strikeOut)
             assertEquals(8, Gabriel!!.findOne(0)!!.walks)
 
-
             // update franchise 5 with new game information and ensure contents updated successfully
             assertTrue(Gabriel!!.update(0, Stat(1, 2, 3, 4, 5, 6, 7, 8, 0)))
             assertEquals(1, Gabriel!!.findOne(0)!!.hits)
@@ -118,10 +115,6 @@ class PlayerTest {
             assertEquals(1, Jorge!!.statSize())
             assertEquals(true, Jorge!!.delete(0))
             assertEquals(0, Jorge!!.statSize())
-
         }
     }
-
-
-
 }

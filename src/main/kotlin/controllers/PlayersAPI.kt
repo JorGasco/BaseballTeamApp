@@ -1,14 +1,8 @@
 package controllers
 import models.Player
-
-import utils.Utilities.formatListString
-
 import persistence.Serializer
-
-
+import utils.Utilities.formatListString
 import java.util.ArrayList
-
-
 
 class PlayersAPI(serializerType: Serializer) {
 
@@ -27,7 +21,7 @@ class PlayersAPI(serializerType: Serializer) {
         return players.add(player)
     }
 
-    //List
+    // List
     fun findAll(): List<Player> {
         return players
     }
@@ -62,20 +56,18 @@ class PlayersAPI(serializerType: Serializer) {
         return false
     }
 
-
     fun listAllStats() =
         if (players.isEmpty()) "There are no Players and no Stats"
         else {
             var listOfStats = ""
             for (player in players) {
                 for (stat in player.stats) {
-                    listOfStats += "${player} \n\t${stat}\n"
+                    listOfStats += "$player \n\t${stat}\n"
                 }
             }
             if (listOfStats == "") "No Stats found in Players"
             else listOfStats
         }
-
 
     @Throws(Exception::class)
     fun save() {
@@ -89,12 +81,9 @@ class PlayersAPI(serializerType: Serializer) {
         lastId = players.size
     }
 
-
-
     fun listAllPLayers() =
         if (players.isEmpty()) "There are no players"
-    else formatListString(players)
-
+        else formatListString(players)
 
     fun searchByPositions(searchString: String) =
         formatListString(players.filter { player -> player.position.contains(searchString, ignoreCase = true) })
@@ -102,8 +91,7 @@ class PlayersAPI(serializerType: Serializer) {
     fun searchPlayerName(searchString: String) =
         formatListString(players.filter { player -> player.playerName.contains(searchString, ignoreCase = true) })
 
-    fun numberOfPlayers()= players.size
-
+    fun numberOfPlayers() = players.size
 
     fun searchHits(searchInt: Int): String {
         return if (numberOfPlayers() == 0) {
@@ -126,21 +114,18 @@ class PlayersAPI(serializerType: Serializer) {
         val totalAge = players.sumBy { it.age }
         val average = totalAge.toDouble() / players.size
         return String.format("%.2f", average)
-
     }
 
     fun averageWeight(): String {
         val totalWeight = players.sumByDouble { it.weight }
         val average = totalWeight.toDouble() / players.size
         return String.format("%.2f", average)
-
     }
 
     fun averageHeight(): String {
         val totalHeight = players.sumByDouble { it.height }
         val average = totalHeight.toDouble() / players.size
         return String.format("%.2f", average)
-
     }
 
     fun averagePlayerStats(): String {
@@ -183,7 +168,6 @@ class PlayersAPI(serializerType: Serializer) {
         val stringaverageStrikeouts = String.format("%.2f", averageStrikeouts)
         val stringaverageWalks = String.format("%.2f", averageWalks)
 
-
         // Create a formatted string to display the averages
         return """
         |-------------------------------------
@@ -206,8 +190,7 @@ class PlayersAPI(serializerType: Serializer) {
 
     fun findPlayer(playerId: Int) = players.find { player -> player.playerId == playerId }
 
-
-    //utility method to determine if an index is valid in a list.
+    // utility method to determine if an index is valid in a list.
     fun isValidListIndex(index: Int, list: List<Any>): Boolean {
         return (index >= 0 && index < list.size)
     }
@@ -223,29 +206,4 @@ class PlayersAPI(serializerType: Serializer) {
             }
             StatAmount
         }
-
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
