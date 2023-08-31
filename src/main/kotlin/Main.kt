@@ -24,17 +24,17 @@ fun start() {
             5 -> updatePlayer()
 
 
-            7 -> addStats()
-            8 -> listStats()
-            9 -> deleteStat()
-            10 -> updateStat()
-            11 -> searchStat()
+            6 -> addStats()
+            7 -> listStats()
+            8 -> deleteStat()
+            9 -> updateStat()
+            10 -> searchStat()
 
-            12 -> searchPositions()
-            13 -> searchPlayerByName()
-            14 -> searchStatsByHits()
+            11 -> searchPositions()
+            12 -> searchPlayerByName()
+            13 -> searchStatsByHits()
 
-            15 -> report()
+            14 -> report()
 
             19 -> load()
             20 -> save()
