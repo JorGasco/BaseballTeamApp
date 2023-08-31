@@ -17,12 +17,12 @@ fun start() {
     do {
         input = menu()
         when (input) {
-            1 -> add()
+            1 -> addPlayer()
             2 -> listPlayers()
             3 -> search()
             4 -> deletePlayer()
             5 -> updatePlayer()
-            // 6-> setPlayerActivity()
+
 
             7 -> addStats()
             8 -> listStats()
@@ -80,22 +80,21 @@ fun menu(): Int {
          |   3. Search Player
          |   4. Delete Player
          |   5. Update Player
-         |   6.Active Player
          |   
          |--------- Stats ---------------
          |   7. Add Stat
          |   8. List Stats
          |   9. Delete Stat
-         |   10.Update Stat
+         |   10. Update Stat
          |   11. Search Stat
          |   
          |   -----------------------------
          |   
          |   12. Search Positions
          |   13. Search Name Player
-         |   14.Search Hits
+         |   14. Search Hits
          |   
-         |   15.Total Average
+         |   15. Report Team
          |   
          |   19. Load
          |   20. Save
@@ -109,7 +108,7 @@ fun menu(): Int {
     return readLine()!!.toInt()
 }
 
-fun add() {
+fun addPlayer() {
 
     val playerName = ScannerInput.readNextLine("First Name: ")
     val playerSurname = ScannerInput.readNextLine("Surname: ")
@@ -358,3 +357,5 @@ private fun chooseStat(player: Player): Stat? {
         return null
     }
 }
+
+

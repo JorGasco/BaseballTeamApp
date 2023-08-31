@@ -21,10 +21,7 @@ class PlayersAPI(serializerType: Serializer) {
         return players.add(player)
     }
 
-    // List
-    fun findAll(): List<Player> {
-        return players
-    }
+
 
     fun findOne(playerId: Int): Player? {
         return players.find { p -> p.playerId == playerId }
@@ -182,18 +179,9 @@ class PlayersAPI(serializerType: Serializer) {
     """.trimMargin("|")
     }
 
-    /*fun findPlayer(index: Int): Player? {
-        return if (isValidListIndex(index, players)) {
-            players[index]
-        } else null
-    }*/
+
 
     fun findPlayer(playerId: Int) = players.find { player -> player.playerId == playerId }
-
-    // utility method to determine if an index is valid in a list.
-    fun isValidListIndex(index: Int, list: List<Any>): Boolean {
-        return (index >= 0 && index < list.size)
-    }
 
     fun numberOfStats() =
         if (players.isEmpty()) 0

@@ -21,190 +21,178 @@ import java.util.ArrayList
 <span class="fc" id="L21">        return players.add(player)</span>
     }
 
-    // List
-    fun findAll(): List&lt;Player&gt; {
-<span class="nc" id="L26">        return players</span>
-    }
+
 
     fun findOne(playerId: Int): Player? {
-<span class="fc bfc" id="L30" title="All 6 branches covered.">        return players.find { p -&gt; p.playerId == playerId }</span>
+<span class="fc bfc" id="L27" title="All 6 branches covered.">        return players.find { p -&gt; p.playerId == playerId }</span>
     }
 
     fun delete(id: Int): Boolean {
-<span class="fc" id="L34">        val foundPlayer = findOne(id)</span>
+<span class="fc" id="L31">        val foundPlayer = findOne(id)</span>
 
-<span class="fc bfc" id="L36" title="All 2 branches covered.">        if (foundPlayer != null) {</span>
+<span class="fc bfc" id="L33" title="All 2 branches covered.">        if (foundPlayer != null) {</span>
             // Use the 'remove' function to remove the found employee from the list.
-<span class="fc" id="L38">            players.remove(foundPlayer)</span>
-<span class="fc" id="L39">            return true</span>
+<span class="fc" id="L35">            players.remove(foundPlayer)</span>
+<span class="fc" id="L36">            return true</span>
         }
-<span class="fc" id="L41">        return false</span>
+<span class="fc" id="L38">        return false</span>
     }
 
     fun update(id: Int, player: Player): Boolean {
-<span class="fc" id="L45">        val foundPlayer = findOne(id)</span>
+<span class="fc" id="L42">        val foundPlayer = findOne(id)</span>
 
-<span class="fc bfc" id="L47" title="All 2 branches covered.">        if (foundPlayer != null) {</span>
-<span class="fc" id="L48">            foundPlayer.playerName = player.playerName</span>
-<span class="fc" id="L49">            foundPlayer.playerSurname = player.playerSurname</span>
-<span class="fc" id="L50">            foundPlayer.age = player.age</span>
-<span class="fc" id="L51">            foundPlayer.height = player.height</span>
-<span class="fc" id="L52">            foundPlayer.weight = player.weight</span>
-<span class="fc" id="L53">            foundPlayer.position = player.position</span>
-<span class="fc" id="L54">            return true</span>
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        if (foundPlayer != null) {</span>
+<span class="fc" id="L45">            foundPlayer.playerName = player.playerName</span>
+<span class="fc" id="L46">            foundPlayer.playerSurname = player.playerSurname</span>
+<span class="fc" id="L47">            foundPlayer.age = player.age</span>
+<span class="fc" id="L48">            foundPlayer.height = player.height</span>
+<span class="fc" id="L49">            foundPlayer.weight = player.weight</span>
+<span class="fc" id="L50">            foundPlayer.position = player.position</span>
+<span class="fc" id="L51">            return true</span>
         }
-<span class="fc" id="L56">        return false</span>
+<span class="fc" id="L53">        return false</span>
     }
 
     fun listAllStats() =
-<span class="nc bnc" id="L60" title="All 2 branches missed.">        if (players.isEmpty()) &quot;There are no Players and no Stats&quot;</span>
+<span class="nc bnc" id="L57" title="All 2 branches missed.">        if (players.isEmpty()) &quot;There are no Players and no Stats&quot;</span>
         else {
-<span class="nc" id="L62">            var listOfStats = &quot;&quot;</span>
-<span class="nc bnc" id="L63" title="All 2 branches missed.">            for (player in players) {</span>
-<span class="nc bnc" id="L64" title="All 2 branches missed.">                for (stat in player.stats) {</span>
-<span class="nc" id="L65">                    listOfStats += &quot;$player \n\t${stat}\n&quot;</span>
+<span class="nc" id="L59">            var listOfStats = &quot;&quot;</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            for (player in players) {</span>
+<span class="nc bnc" id="L61" title="All 2 branches missed.">                for (stat in player.stats) {</span>
+<span class="nc" id="L62">                    listOfStats += &quot;$player \n\t${stat}\n&quot;</span>
                 }
             }
-<span class="nc bnc" id="L68" title="All 2 branches missed.">            if (listOfStats == &quot;&quot;) &quot;No Stats found in Players&quot;</span>
-<span class="nc" id="L69">            else listOfStats</span>
-<span class="nc" id="L70">        }</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">            if (listOfStats == &quot;&quot;) &quot;No Stats found in Players&quot;</span>
+<span class="nc" id="L66">            else listOfStats</span>
+<span class="nc" id="L67">        }</span>
 
     @Throws(Exception::class)
     fun save() {
-<span class="fc" id="L74">        serializer.write(players)</span>
-<span class="fc" id="L75">    }</span>
+<span class="fc" id="L71">        serializer.write(players)</span>
+<span class="fc" id="L72">    }</span>
 
     @Throws(Exception::class)
     fun load() {
         @Suppress(&quot;UNCHECKED_CAST&quot;)
-<span class="fc" id="L80">        players = serializer.read() as ArrayList&lt;Player&gt;</span>
-<span class="fc" id="L81">        lastId = players.size</span>
-<span class="fc" id="L82">    }</span>
+<span class="fc" id="L77">        players = serializer.read() as ArrayList&lt;Player&gt;</span>
+<span class="fc" id="L78">        lastId = players.size</span>
+<span class="fc" id="L79">    }</span>
 
     fun listAllPLayers() =
-<span class="fc bfc" id="L85" title="All 2 branches covered.">        if (players.isEmpty()) &quot;There are no players&quot;</span>
-<span class="fc" id="L86">        else formatListString(players)</span>
+<span class="fc bfc" id="L82" title="All 2 branches covered.">        if (players.isEmpty()) &quot;There are no players&quot;</span>
+<span class="fc" id="L83">        else formatListString(players)</span>
 
     fun searchByPositions(searchString: String) =
-<span class="nc" id="L89">        formatListString(players.filter { player -&gt; player.position.contains(searchString, ignoreCase = true) })</span>
+<span class="nc" id="L86">        formatListString(players.filter { player -&gt; player.position.contains(searchString, ignoreCase = true) })</span>
 
     fun searchPlayerName(searchString: String) =
-<span class="nc" id="L92">        formatListString(players.filter { player -&gt; player.playerName.contains(searchString, ignoreCase = true) })</span>
+<span class="nc" id="L89">        formatListString(players.filter { player -&gt; player.playerName.contains(searchString, ignoreCase = true) })</span>
 
-<span class="fc" id="L94">    fun numberOfPlayers() = players.size</span>
+<span class="fc" id="L91">    fun numberOfPlayers() = players.size</span>
 
     fun searchHits(searchInt: Int): String {
-<span class="nc bnc" id="L97" title="All 2 branches missed.">        return if (numberOfPlayers() == 0) {</span>
-<span class="nc" id="L98">            &quot;No Players available&quot;</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">        return if (numberOfPlayers() == 0) {</span>
+<span class="nc" id="L95">            &quot;No Players available&quot;</span>
         } else {
-<span class="nc" id="L100">            var listOfPlayers = &quot;&quot;</span>
-<span class="nc bnc" id="L101" title="All 2 branches missed.">            for (player in players) {</span>
-<span class="nc bnc" id="L102" title="All 2 branches missed.">                for (stat in player.stats) {</span>
-<span class="nc bnc" id="L103" title="All 2 branches missed.">                    if (stat.hits &lt;= searchInt) {</span>
-<span class="nc" id="L104">                        listOfPlayers += &quot;${player.playerId}: ${player.getFullName()} \n\t${stat}\n&quot;</span>
+<span class="nc" id="L97">            var listOfPlayers = &quot;&quot;</span>
+<span class="nc bnc" id="L98" title="All 2 branches missed.">            for (player in players) {</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">                for (stat in player.stats) {</span>
+<span class="nc bnc" id="L100" title="All 2 branches missed.">                    if (stat.hits &lt;= searchInt) {</span>
+<span class="nc" id="L101">                        listOfPlayers += &quot;${player.playerId}: ${player.getFullName()} \n\t${stat}\n&quot;</span>
                     }
                 }
             }
-<span class="nc bnc" id="L108" title="All 2 branches missed.">            if (listOfPlayers == &quot;&quot;) &quot;No Stats found : $searchInt&quot;</span>
-<span class="nc" id="L109">            else listOfPlayers</span>
+<span class="nc bnc" id="L105" title="All 2 branches missed.">            if (listOfPlayers == &quot;&quot;) &quot;No Stats found : $searchInt&quot;</span>
+<span class="nc" id="L106">            else listOfPlayers</span>
         }
     }
 
     fun averageAge(): String {
-<span class="nc" id="L114">        val totalAge = players.sumBy { it.age }</span>
-<span class="nc" id="L115">        val average = totalAge.toDouble() / players.size</span>
-<span class="nc" id="L116">        return String.format(&quot;%.2f&quot;, average)</span>
+<span class="nc" id="L111">        val totalAge = players.sumBy { it.age }</span>
+<span class="nc" id="L112">        val average = totalAge.toDouble() / players.size</span>
+<span class="nc" id="L113">        return String.format(&quot;%.2f&quot;, average)</span>
     }
 
     fun averageWeight(): String {
-<span class="nc" id="L120">        val totalWeight = players.sumByDouble { it.weight }</span>
-<span class="nc" id="L121">        val average = totalWeight.toDouble() / players.size</span>
-<span class="nc" id="L122">        return String.format(&quot;%.2f&quot;, average)</span>
+<span class="nc" id="L117">        val totalWeight = players.sumByDouble { it.weight }</span>
+<span class="nc" id="L118">        val average = totalWeight.toDouble() / players.size</span>
+<span class="nc" id="L119">        return String.format(&quot;%.2f&quot;, average)</span>
     }
 
     fun averageHeight(): String {
-<span class="nc" id="L126">        val totalHeight = players.sumByDouble { it.height }</span>
-<span class="nc" id="L127">        val average = totalHeight.toDouble() / players.size</span>
-<span class="nc" id="L128">        return String.format(&quot;%.2f&quot;, average)</span>
+<span class="nc" id="L123">        val totalHeight = players.sumByDouble { it.height }</span>
+<span class="nc" id="L124">        val average = totalHeight.toDouble() / players.size</span>
+<span class="nc" id="L125">        return String.format(&quot;%.2f&quot;, average)</span>
     }
 
     fun averagePlayerStats(): String {
-<span class="nc" id="L132">        val totalPlayers = players.size</span>
+<span class="nc" id="L129">        val totalPlayers = players.size</span>
 
         // Initialize variables to store the sum of each statistic
-<span class="nc" id="L135">        var totalHits = 0</span>
-<span class="nc" id="L136">        var totalDoubles = 0</span>
-<span class="nc" id="L137">        var totalTriples = 0</span>
-<span class="nc" id="L138">        var totalHomeRuns = 0</span>
-<span class="nc" id="L139">        var totalRuns = 0</span>
-<span class="nc" id="L140">        var totalStrikeouts = 0</span>
-<span class="nc" id="L141">        var totalWalks = 0</span>
+<span class="nc" id="L132">        var totalHits = 0</span>
+<span class="nc" id="L133">        var totalDoubles = 0</span>
+<span class="nc" id="L134">        var totalTriples = 0</span>
+<span class="nc" id="L135">        var totalHomeRuns = 0</span>
+<span class="nc" id="L136">        var totalRuns = 0</span>
+<span class="nc" id="L137">        var totalStrikeouts = 0</span>
+<span class="nc" id="L138">        var totalWalks = 0</span>
 
         // Calculate the sum of each statistic across all players
-<span class="nc bnc" id="L144" title="All 2 branches missed.">        for (player in players) {</span>
-<span class="nc" id="L145">            totalHits += player.stats.sumBy { it.hits }</span>
-<span class="nc" id="L146">            totalDoubles += player.stats.sumBy { it.doubles }</span>
-<span class="nc" id="L147">            totalTriples += player.stats.sumBy { it.triples }</span>
-<span class="nc" id="L148">            totalHomeRuns += player.stats.sumBy { it.homeRuns }</span>
-<span class="nc" id="L149">            totalRuns += player.stats.sumBy { it.runs }</span>
-<span class="nc" id="L150">            totalStrikeouts += player.stats.sumBy { it.strikeOut }</span>
-<span class="nc" id="L151">            totalWalks += player.stats.sumBy { it.walks }</span>
+<span class="nc bnc" id="L141" title="All 2 branches missed.">        for (player in players) {</span>
+<span class="nc" id="L142">            totalHits += player.stats.sumBy { it.hits }</span>
+<span class="nc" id="L143">            totalDoubles += player.stats.sumBy { it.doubles }</span>
+<span class="nc" id="L144">            totalTriples += player.stats.sumBy { it.triples }</span>
+<span class="nc" id="L145">            totalHomeRuns += player.stats.sumBy { it.homeRuns }</span>
+<span class="nc" id="L146">            totalRuns += player.stats.sumBy { it.runs }</span>
+<span class="nc" id="L147">            totalStrikeouts += player.stats.sumBy { it.strikeOut }</span>
+<span class="nc" id="L148">            totalWalks += player.stats.sumBy { it.walks }</span>
         }
 
         // Calculate the averages
-<span class="nc" id="L155">        val averageHits = totalHits.toDouble() / totalPlayers</span>
-<span class="nc" id="L156">        val averageDoubles = totalDoubles.toDouble() / totalPlayers</span>
-<span class="nc" id="L157">        val averageTriples = totalTriples.toDouble() / totalPlayers</span>
-<span class="nc" id="L158">        val averageHomeRuns = totalHomeRuns.toDouble() / totalPlayers</span>
-<span class="nc" id="L159">        val averageRuns = totalRuns.toDouble() / totalPlayers</span>
-<span class="nc" id="L160">        val averageStrikeouts = totalStrikeouts.toDouble() / totalPlayers</span>
-<span class="nc" id="L161">        val averageWalks = totalWalks.toDouble() / totalPlayers</span>
+<span class="nc" id="L152">        val averageHits = totalHits.toDouble() / totalPlayers</span>
+<span class="nc" id="L153">        val averageDoubles = totalDoubles.toDouble() / totalPlayers</span>
+<span class="nc" id="L154">        val averageTriples = totalTriples.toDouble() / totalPlayers</span>
+<span class="nc" id="L155">        val averageHomeRuns = totalHomeRuns.toDouble() / totalPlayers</span>
+<span class="nc" id="L156">        val averageRuns = totalRuns.toDouble() / totalPlayers</span>
+<span class="nc" id="L157">        val averageStrikeouts = totalStrikeouts.toDouble() / totalPlayers</span>
+<span class="nc" id="L158">        val averageWalks = totalWalks.toDouble() / totalPlayers</span>
 
-<span class="nc" id="L163">        val stringHits = String.format(&quot;%.2f&quot;, averageHits)</span>
-<span class="nc" id="L164">        val stringaverageDoubles = String.format(&quot;%.2f&quot;, averageDoubles)</span>
-<span class="nc" id="L165">        val stringaverageTriples = String.format(&quot;%.2f&quot;, averageTriples)</span>
-<span class="nc" id="L166">        val stringaverageHomeRuns = String.format(&quot;%.2f&quot;, averageHomeRuns)</span>
-<span class="nc" id="L167">        val stringaverageRuns = String.format(&quot;%.2f&quot;, averageRuns)</span>
-<span class="nc" id="L168">        val stringaverageStrikeouts = String.format(&quot;%.2f&quot;, averageStrikeouts)</span>
-<span class="nc" id="L169">        val stringaverageWalks = String.format(&quot;%.2f&quot;, averageWalks)</span>
+<span class="nc" id="L160">        val stringHits = String.format(&quot;%.2f&quot;, averageHits)</span>
+<span class="nc" id="L161">        val stringaverageDoubles = String.format(&quot;%.2f&quot;, averageDoubles)</span>
+<span class="nc" id="L162">        val stringaverageTriples = String.format(&quot;%.2f&quot;, averageTriples)</span>
+<span class="nc" id="L163">        val stringaverageHomeRuns = String.format(&quot;%.2f&quot;, averageHomeRuns)</span>
+<span class="nc" id="L164">        val stringaverageRuns = String.format(&quot;%.2f&quot;, averageRuns)</span>
+<span class="nc" id="L165">        val stringaverageStrikeouts = String.format(&quot;%.2f&quot;, averageStrikeouts)</span>
+<span class="nc" id="L166">        val stringaverageWalks = String.format(&quot;%.2f&quot;, averageWalks)</span>
 
         // Create a formatted string to display the averages
-<span class="nc" id="L172">        return &quot;&quot;&quot;</span>
+<span class="nc" id="L169">        return &quot;&quot;&quot;</span>
         |-------------------------------------
-<span class="nc" id="L174">        |Average Hits: $stringHits</span>
-<span class="nc" id="L175">        |Average Doubles: $stringaverageDoubles</span>
-<span class="nc" id="L176">        |Average Triples: $stringaverageTriples</span>
-<span class="nc" id="L177">        |Average Home Runs: $stringaverageHomeRuns</span>
-<span class="nc" id="L178">        |Average Runs: $stringaverageRuns</span>
-<span class="nc" id="L179">        |Average Strikeouts: $stringaverageStrikeouts</span>
-<span class="nc" id="L180">        |Average Walks: $stringaverageWalks</span>
+<span class="nc" id="L171">        |Average Hits: $stringHits</span>
+<span class="nc" id="L172">        |Average Doubles: $stringaverageDoubles</span>
+<span class="nc" id="L173">        |Average Triples: $stringaverageTriples</span>
+<span class="nc" id="L174">        |Average Home Runs: $stringaverageHomeRuns</span>
+<span class="nc" id="L175">        |Average Runs: $stringaverageRuns</span>
+<span class="nc" id="L176">        |Average Strikeouts: $stringaverageStrikeouts</span>
+<span class="nc" id="L177">        |Average Walks: $stringaverageWalks</span>
         |-------------------------------------
-<span class="nc" id="L182">    &quot;&quot;&quot;.trimMargin(&quot;|&quot;)</span>
+<span class="nc" id="L179">    &quot;&quot;&quot;.trimMargin(&quot;|&quot;)</span>
     }
 
-    /*fun findPlayer(index: Int): Player? {
-        return if (isValidListIndex(index, players)) {
-            players[index]
-        } else null
-    }*/
 
-<span class="pc bpc" id="L191" title="1 of 6 branches missed.">    fun findPlayer(playerId: Int) = players.find { player -&gt; player.playerId == playerId }</span>
 
-    // utility method to determine if an index is valid in a list.
-    fun isValidListIndex(index: Int, list: List&lt;Any&gt;): Boolean {
-<span class="nc bnc" id="L195" title="All 4 branches missed.">        return (index &gt;= 0 &amp;&amp; index &lt; list.size)</span>
-    }
+<span class="pc bpc" id="L184" title="1 of 6 branches missed.">    fun findPlayer(playerId: Int) = players.find { player -&gt; player.playerId == playerId }</span>
 
     fun numberOfStats() =
-<span class="pc bpc" id="L199" title="1 of 2 branches missed.">        if (players.isEmpty()) 0</span>
+<span class="pc bpc" id="L187" title="1 of 2 branches missed.">        if (players.isEmpty()) 0</span>
         else {
-<span class="fc" id="L201">            var StatAmount = 0</span>
-<span class="fc bfc" id="L202" title="All 2 branches covered.">            for (player in players) {</span>
-<span class="fc bfc" id="L203" title="All 2 branches covered.">                for (Stat in player.stats) {</span>
-<span class="fc" id="L204">                    StatAmount ++</span>
+<span class="fc" id="L189">            var StatAmount = 0</span>
+<span class="fc bfc" id="L190" title="All 2 branches covered.">            for (player in players) {</span>
+<span class="fc bfc" id="L191" title="All 2 branches covered.">                for (Stat in player.stats) {</span>
+<span class="fc" id="L192">                    StatAmount ++</span>
                 }
             }
-<span class="fc" id="L207">            StatAmount</span>
-<span class="fc" id="L208">        }</span>
+<span class="fc" id="L195">            StatAmount</span>
+<span class="fc" id="L196">        }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.7.202105040129</span></div></body></html>

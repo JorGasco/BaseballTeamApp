@@ -60,7 +60,7 @@ data class Player(
         return false
     }
     fun listStats() =
-        if (stats.isEmpty()) "\tNo Games Added"
+        if (stats.isEmpty()) "\tNo Stats Added"
         else Utilities.formatSetString(stats)
 
     fun statSize() = stats.size
